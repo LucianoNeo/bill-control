@@ -1,0 +1,15 @@
+body{
+    background: rgb(194, 194, 233);
+}
+
+table {
+    width: 300px;
+    border: 2px solid rgb(5, 0, 0);
+    //border-collapse: collapse;
+    background-color: rgb(142, 195, 230);
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    padding:5px;
+    text-align: center;
+  }

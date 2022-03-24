@@ -130,3 +130,27 @@ function mostraSecao(secao,desligar) {
     }
     
     }
+
+
+
+$(document).ready(function(){
+	//Telefone
+	$("#fone").mask("(00) 00000-0000");
+
+	//CEP
+	$("#cep").mask("99999-999");
+
+	//CPF
+	$("#cpf").mask("999.999.999-99");
+
+	//CNPJ
+	$("#cnpj").mask("99.999.999/9999-99");
+
+	//Data
+	$("#data").mask("99/99");
+
+	//Dinheiro
+	$('#dinheiro1').mask('000.000.000.000.000,00' , { reverse : true});
+
+	$('#valor').mask("#.##0,00" , { reverse:true});
+});

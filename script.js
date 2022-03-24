@@ -113,7 +113,8 @@ function desenhaTela(mes) {
         
     }
     res.innerHTML = elemento;
-    res.innerHTML += `<td>TOTAL=</td><td></td><td><strong>R$${total},00</strong></td></tr>` 
+    res.innerHTML += `<td>TOTAL=</td><td></td><td><strong>R$${total},00</strong></td></tr>`
+    document.getElementById('cabecalho').style.position='relative' 
 }
 
 
@@ -123,4 +124,5 @@ function mostraSecao(secao,desligar) {
     ver.style.display ='block'
     apagar.style.display ='none'
     document.getElementById('bv').style.display='none'
+    
     }

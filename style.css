@@ -1,3 +1,4 @@
+
 body{
     font-family: 'PT Sans Narrow', sans-serif;
     color: white;    
@@ -133,6 +134,7 @@ header{
   }
 
   #escolha{
+    margin-left: 30px;
     width: 150px;
     font-weight: bold;
     text-shadow: 0.05em 0.05em 0.05em rgb(29, 27, 27);
@@ -140,8 +142,9 @@ header{
 }
 
  .container{
+
     position: relative;
-    width: 100%;
+    width: 95%;
     display: flex;
     flex-wrap: wrap;
     height: 100%;

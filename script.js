@@ -116,6 +116,8 @@ function desenhaTela(mes) {
     res.innerHTML += `<td>TOTAL=</td><td></td><td><strong>R$${total},00</strong></td></tr>`
     document.getElementById('rodape').style.position='relative'
     document.getElementById('rodape').style.width='103%'
+    document.getElementById('rodape').style.height='40px'
+    document.getElementById('rodape').style.bottom='-10px'
 }
 
 

@@ -114,7 +114,8 @@ function desenhaTela(mes) {
     }
     res.innerHTML = elemento;
     res.innerHTML += `<td>TOTAL=</td><td></td><td><strong>R$${total},00</strong></td></tr>`
-    document.getElementById('cabecalho').style.position='relative' 
+    document.getElementById('rodape').style.position='relative'
+    document.getElementById('rodape').style.width='103%'
 }
 
 
@@ -125,7 +126,7 @@ function mostraSecao(secao,desligar) {
     apagar.style.display ='none'
     document.getElementById('bv').style.display='none'
     if(secao == 'cadastro'){
-        document.getElementById('cabecalho').style.position='relative' 
+        document.getElementById('rodape').style.position='relative' 
     }
     
     }

@@ -4,7 +4,7 @@ body{
     background-image: url("./img/fundo.png");
     background-repeat:repeat-y;
     background-size: cover;
-    height: 97vh;
+    max-height: 97vh;
     margin: 0;
     
     
@@ -59,7 +59,7 @@ header{
     //justify-content: space-around;
     //border-radius: 20px;
     margin:auto;
-    max-height:60px;
+    max-height:80px;
   }
 
 
@@ -200,7 +200,7 @@ table button {
     position: fixed;
     bottom: 0;
     width: 100%;
-    height: 80px;
+    height: 50px;
     background-color:rgb(54, 50, 50);
     text-align: center;
     margin:0;

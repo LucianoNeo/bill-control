@@ -83,9 +83,9 @@ function desenhaTela(mes) {
         "<button class='vermelho' onclick=''>❌</button>"+"</td></tr>";
     }
     res.innerHTML = elemento;
-    res.innerHTML += `<td>TOTAL=</td>` 
+    res.innerHTML += `<tr><td>TOTAL=</td>` 
     res.innerHTML += `<td></td>`
-    res.innerHTML += `<td>R$${total},00</td>`
+    res.innerHTML += `<td>R$${total},00</td></tr>`
 
     var res = document.getElementById('mostraLanches');
     var elemento ='';

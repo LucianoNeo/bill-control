@@ -4,7 +4,7 @@ body{
     background-image: url("./img/fundo.png");
     background-repeat:repeat-y;
     background-size: cover;
-    height: 96vh;
+    height: 97vh;
     
     
     
@@ -133,6 +133,7 @@ header{
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+    height: 100%;
     margin:0 auto;
 } 
 
@@ -177,8 +178,19 @@ table button {
   form{
     font-family: 'PT Sans Narrow', sans-serif;
     width: 100%;
+    height: 100%;
     font-size: 14pt;
       display: -ms-inline-grid;
       flex-wrap: wrap;
       align-items: flex-start;
+  }
+
+  footer {
+    position: fixed;
+    bottom: 0;
+    width: 99%;
+    height: 60px;
+    background-color:rgb(54, 50, 50);
+    text-align: center;
+    margin:0 auto;
   }

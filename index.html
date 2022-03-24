@@ -12,10 +12,17 @@
 </head>
 <body>
 <header>
-<h1>Bill Control 💵 Controle De Gastos</h1>
-<p onclick="mostraSecao('visualizar','cadastrar')">Visualizar</p>
-<p onclick="mostraSecao('cadastrar','visualizar')">Cadastrar</p>
+<h1>Expense Control 💵</h1>
+<div class="menu">
+<p onclick="mostraSecao('visualizar','cadastrar')">Visualizar 👓</p>
+<span></span>
+<p onclick="mostraSecao('cadastrar','visualizar')">Cadastrar 📑</p>
+</div>
 </header>
+<div class="bv" id="bv">
+  <p>Seja bem vindo ao Expense Control, seu controle de contas diárias!</p>
+  <img src="https://cdn-icons-png.flaticon.com/512/5229/5229354.png" alt="">
+</div>
 <section id='visualizar'class="visualizar">
 <div id="escolha">
     <p>Escolha o Mês</p>

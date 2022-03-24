@@ -68,8 +68,7 @@ function desenhaTela(mes) {
         "<button class='vermelho' onclick=''>❌</button>"+"</td></tr>";
     }
     res.innerHTML = elemento;
-
-    res.innerHTML += `<td>T: R$${total},00</td>`
+    res.innerHTML += `<td>TOTAL=</td><td></td><td><strong>R$${total},00</strong></td></tr>` 
     
     var res = document.getElementById('mostraExtras');
     var elemento ='';
@@ -80,12 +79,11 @@ function desenhaTela(mes) {
         elemento += "<td>R$" + extras[i].valor + ",00</td>";
         total += Number(extras[i].valor)
         elemento += "<td>" + "<button class='verde' onclick=''>📝</button>"+
-        "<button class='vermelho' onclick=''>❌</button>"+"</td></tr>";
+        "<button class='vermelho' onclick=''>❌</button>"+"</td>";
     }
     res.innerHTML = elemento;
-    res.innerHTML += `<tr><td>TOTAL=</td>` 
-    res.innerHTML += `<td></td>`
-    res.innerHTML += `<td>R$${total},00</td></tr>`
+    res.innerHTML += `<td>TOTAL=</td><td></td><td><strong>R$${total},00</strong></td></tr>` 
+    
 
     var res = document.getElementById('mostraLanches');
     var elemento ='';
@@ -99,7 +97,9 @@ function desenhaTela(mes) {
         "<button class='vermelho' onclick=''>❌</button>"+"</td></tr>";
     }
     res.innerHTML = elemento;
-    res.innerHTML += `<td>T: R$${total},00</td>`
+    res.innerHTML += `<td>TOTAL=</td><td></td><td><strong>R$${total},00</strong></td></tr>` 
+
+
     var res = document.getElementById('mostraParcelado');
     var elemento ='';
     var total = Number(0)
@@ -113,7 +113,7 @@ function desenhaTela(mes) {
         
     }
     res.innerHTML = elemento;
-    res.innerHTML += `<td>T: R$${total},00</td>`
+    res.innerHTML += `<td>TOTAL=</td><td></td><td><strong>R$${total},00</strong></td></tr>` 
 }
 
 
@@ -122,4 +122,5 @@ function mostraSecao(secao,desligar) {
     var apagar = document.getElementById(desligar)
     ver.style.display ='block'
     apagar.style.display ='none'
+    document.getElementById('bv').style.display='none'
     }

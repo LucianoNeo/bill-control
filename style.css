@@ -15,16 +15,19 @@ body{
 }
 
 .cadastrar{
-    padding: 10px;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 2px;
     margin-top:20px;
     margin-left: auto;
     margin-right: auto;
-    width: 400px;
+    width: 280px;
     justify-content:space-between;
     background-color: rgb(39, 37, 37);;
     font-weight: bold;
     text-shadow: 0.05em 0.05em 0.05em rgb(29, 27, 27);
     display: none;
+    border-radius: 10px;
 }
 
 .cadastrar p{
@@ -33,9 +36,21 @@ body{
       font-size: 20pt;
 }
 
+
+.cadastrar input,select{
+  font-family: 'PT Sans Narrow', sans-serif;
+  font-size: 15pt;
+  width: 100%;
+  height: 30px;
+  margin-bottom: 10px;
+  background-color: rgb(54, 50, 50);
+  color: #F2FFFC;
+}
+
+
 header{
     width: 97%;
-    padding: 10px;
+    padding-left: 20px;
     background-color: rgb(39, 37, 37);
     //margin-bottom: 15px;
     display: flex;
@@ -44,11 +59,19 @@ header{
     border-radius: 20px;
   }
 
-  header p{
+
+  .menu{
+    display: flex;
+    margin-left: auto;
+    
+   
+  }
+  .menu p{
     color: #F2FFFC;
-    text-decoration: none;
-    text-align: right;
+    text-align: center;
+    
     margin: auto;
+    margin-right: 50px;
   }
 
   header p:hover{
@@ -57,14 +80,49 @@ header{
   transform: scale(1.5);
   }
 
-  #escolha{
-      font-weight: bold;
-      text-shadow: 0.05em 0.05em 0.05em rgb(29, 27, 27);
-      font-size: 20pt;
+
+#bv{
+  position: relative;
+  top: -400px;
+  animation: drop 0.8s ease forwards;
+}
+
+@keyframes drop{
+0% {opacity: 0};
+70%{transform: translateY(700px)}
+100%{transform: translateY(500px); opacity: 1;}
+
+}
+
+
+  .bv{
+    width: 300px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: rgb(240, 221, 197);
+    font-size: 18pt;
+    color: black;
+    box-shadow: inset -5px -5px rgba(0, 0, 0, 0.521);
+    text-align: center;
+    display: flex;
+
+  }
+
+  .bv img{
+    height: 120px;
+    margin-top: 10px;
+
+  }
+
+  #escolha input{
+      background-color: rgb(54, 50, 50);
+      color: #F2FFFC;
+      padding: 5px;
   }
 
   #escolha{
-      width: 15%;
+    width: 150px;
     font-weight: bold;
     text-shadow: 0.05em 0.05em 0.05em rgb(29, 27, 27);
     font-size: 20pt;
@@ -98,13 +156,6 @@ table {
   }
 
 
-  .cadastrar input,select{
-    width: 98%;
-    height: 30px;
-    margin-bottom: 10px;
-    background-color: rgb(54, 50, 50);
-    color: #F2FFFC;
-  }
 
 
   .vermelho{
@@ -124,6 +175,8 @@ table button {
   }
 
   form{
+    font-family: 'PT Sans Narrow', sans-serif;
+    width: 100%;
     font-size: 14pt;
       display: -ms-inline-grid;
       flex-wrap: wrap;

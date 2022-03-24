@@ -103,7 +103,7 @@ header{
     background-color: rgb(240, 221, 197);
     font-size: 18pt;
     color: black;
-    box-shadow: inset -5px -5px rgba(0, 0, 0, 0.521);
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.521);
     text-align: center;
     display: flex;
 

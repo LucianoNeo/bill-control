@@ -124,5 +124,8 @@ function mostraSecao(secao,desligar) {
     ver.style.display ='block'
     apagar.style.display ='none'
     document.getElementById('bv').style.display='none'
+    if(secao == 'cadastro'){
+        document.getElementById('cabecalho').style.position='relative' 
+    }
     
     }

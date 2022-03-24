@@ -1,0 +1,54 @@
+body{
+    font-family: 'PT Sans Narrow', sans-serif;
+    color: white;    
+    background-image: url("./img/fundo.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 98vh;
+    
+    
+}
+
+
+header{
+    width: 100%;
+    padding: 2px;
+    background-color: rgb(39, 37, 37);
+    //margin-bottom: 15px;
+    display: flex;
+    color: #F2FFFC;
+    //justify-content: space-around;
+  }
+
+  header a{
+    color: #F2FFFC;
+    text-decoration: none;
+    text-align: right;
+    margin: auto;
+  }
+
+
+ .container{
+    display: flex;
+} 
+
+#tables {
+    display: inline;
+}
+
+table {
+    width: 300px;
+    border: 2px solid rgb(39, 37, 37);
+    //border-collapse: collapse;
+    background-color: rgb(39, 37, 37);
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    padding:5px;
+    text-align: center;
+  }
+
+  input,select{
+    height: 30px;
+    margin-bottom: 10px;
+  }

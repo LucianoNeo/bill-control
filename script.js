@@ -4,16 +4,23 @@ var fev = [gastos]
 var mes = [jan,fev ]
 
 
-var novo = {nome:'peças', tipo: 'parcelado', valor: 150, data: '10/01' }
-var novo1 = {nome:'internet', tipo: 'fixa', valor: 45, data: '15/01' }
-var novo2 = {nome:'dom augustinho', tipo: 'lanches', valor: 25, data: '23/01' }
-var novo3 = {nome:'farmacia', tipo: 'extras', valor: 50, data: '28/01' }
-jan.push(novo,novo1,novo2,novo3)
-var novo = {nome:'olga', tipo: 'parcelado', valor: 20, data: '05/01' }
-var novo1 = {nome:'net', tipo: 'fixa', valor: 35, data: '17/02' }
-var novo2 = {nome:'danidu', tipo: 'lanches', valor: 45, data: '18/02' }
-var novo3 = {nome:'farmacia', tipo: 'extras', valor: 5, data: '23/02' }
-fev.push(novo,novo1,novo2,novo3)
+var novo = {nome:'peças', tipo: 'parcelado', valor: Number(150), data: '10/01' }
+var novo1 = {nome:'internet', tipo: 'fixa', valor: Number(45), data: '15/01' }
+var novo2 = {nome:'dom augustinho', tipo: 'lanches', valor: Number(25), data: '23/01' }
+var novo3 = {nome:'farmacia', tipo: 'extras', valor: Number(50), data: '28/01' }
+var novo4 = {nome:'verduras', tipo: 'extras', valor: Number(25), data: '28/01' }
+var novo5 = {nome:'distrib', tipo: 'extras', valor: Number(35), data: '28/01' }
+jan.push(novo,novo1,novo2,novo3,novo4,novo5)
+var novo = {nome:'olga', tipo: 'parcelado', valor: Number(20), data: '05/01' }
+var novo1 = {nome:'net', tipo: 'fixa', valor: Number(35), data: '17/02' }
+var novo2 = {nome:'danidu', tipo: 'lanches', valor: Number(60), data: '18/02' }
+var novo3 = {nome:'farmacia', tipo: 'extras', valor: Number(5), data: '23/02' }
+var novo4 = {nome:'recanto', tipo: 'lanches', valor: Number(300), data: '18/02' }
+var novo5 = {nome:'garage20', tipo: 'lanches', valor: Number(80), data: '18/02' }
+fev.push(novo,novo1,novo2,novo3,novo4,novo5)
+
+
+
 
 
 
@@ -51,44 +58,65 @@ function desenhaTela(mes) {
     var lanches = mes.filter(filtraLanches);
     var res = document.getElementById('mostraFixas');
     var elemento ='';
-    
+    var total = Number(0)
     for (var i = 0; i < fixas.length; i++) {
         elemento += "<tr><td>" + fixas[i].data + " </td>";
         elemento += "<td>" + fixas[i].nome + "</td>";
-        elemento += "<td>" + fixas[i].valor + "</td>";
-        elemento += "<td>" + fixas[i].tipo + "</td></tr>";
+        elemento += "<td>R$" + fixas[i].valor + ",00</td>";
+        total += Number(fixas[i].valor)
+        elemento += "<td>" + "<button class='verde' onclick=''>📝</button>"+
+        "<button class='vermelho' onclick=''>❌</button>"+"</td></tr>";
     }
     res.innerHTML = elemento;
-
+    res.innerHTML += `<td>T: R$${total},00</td>`
     
     var res = document.getElementById('mostraExtras');
     var elemento ='';
+    var total = Number(0)
     for (var i = 0; i < extras.length; i++) {
         elemento += "<tr><td>" + extras[i].data + " </td>";
-        elemento += "<td>" + fixas[i].nome + "</td>";
-        elemento += "<td>" + extras[i].valor + "</td>";
-        elemento += "<td>" + extras[i].tipo + "</td></tr>";
+        elemento += "<td>" + extras[i].nome + "</td>";
+        elemento += "<td>R$" + extras[i].valor + ",00</td>";
+        total += Number(extras[i].valor)
+        elemento += "<td>" + "<button class='verde' onclick=''>📝</button>"+
+        "<button class='vermelho' onclick=''>❌</button>"+"</td></tr>";
     }
     res.innerHTML = elemento;
-
+    res.innerHTML += `<td>T: R$${total},00</td>`
 
     var res = document.getElementById('mostraLanches');
     var elemento ='';
+    var total = Number(0)
     for (var i = 0; i < lanches.length; i++) {
         elemento += "<tr><td>" + lanches[i].data + " </td>";
         elemento += "<td>" + lanches[i].nome + "</td>";
-        elemento += "<td>" + lanches[i].valor + "</td>";
-        elemento += "<td>" + lanches[i].tipo + "</td></tr>";
+        elemento += "<td>R$" + lanches[i].valor + ",00</td>";
+        total += Number(lanches[i].valor)
+        elemento += "<td>" + "<button class='verde' onclick=''>📝</button>"+
+        "<button class='vermelho' onclick=''>❌</button>"+"</td></tr>";
     }
     res.innerHTML = elemento;
-
+    res.innerHTML += `<td>T: R$${total},00</td>`
     var res = document.getElementById('mostraParcelado');
     var elemento ='';
+    var total = Number(0)
     for (var i = 0; i < parcelado.length; i++) {
         elemento += "<tr><td>" + parcelado[i].data + " </td>";
         elemento += "<td>" + parcelado[i].nome + "</td>";
-        elemento += "<td>" + parcelado[i].valor + "</td>";
-        elemento += "<td>" + parcelado[i].tipo + "</td></tr>";
+        elemento += "<td>R$" + parcelado[i].valor + ",00</td>";
+        total += parcelado[i].valor
+        elemento += "<td>" + "<button class='verde' onclick=''>📝</button>"+
+        "<button class='vermelho' onclick=''>❌</button>"+"</td><tr>";
+        
     }
     res.innerHTML = elemento;
+    res.innerHTML += `<td>T: R$${total},00</td>`
 }
+
+
+function mostraSecao(secao,desligar) {
+    var ver = document.getElementById(secao)
+    var apagar = document.getElementById(desligar)
+    ver.style.display ='block'
+    apagar.style.display ='none'
+    }

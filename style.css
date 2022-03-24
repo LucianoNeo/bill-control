@@ -1,15 +1,131 @@
 body{
-    background: rgb(194, 194, 233);
+    font-family: 'PT Sans Narrow', sans-serif;
+    color: white;    
+    background-image: url("./img/fundo.png");
+    background-repeat:repeat-y;
+    background-size: cover;
+    height: 96vh;
+    
+    
+    
 }
 
-table {
-    width: 300px;
-    border: 2px solid rgb(5, 0, 0);
-    //border-collapse: collapse;
-    background-color: rgb(142, 195, 230);
-    margin-top: 20px;
-    margin-bottom: 20px;
+.visualizar{
+    display: none;
+}
+
+.cadastrar{
+    padding: 10px;
+    margin-top:20px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+    justify-content:space-between;
+    background-color: rgb(39, 37, 37);;
+    font-weight: bold;
+    text-shadow: 0.05em 0.05em 0.05em rgb(29, 27, 27);
+    display: none;
+}
+
+.cadastrar p{
+    font-weight: bold;
+      text-shadow: 0.05em 0.05em 0.05em rgb(29, 27, 27);
+      font-size: 20pt;
+}
+
+header{
+    width: 97%;
+    padding: 10px;
+    background-color: rgb(39, 37, 37);
+    //margin-bottom: 15px;
+    display: flex;
+    color: #F2FFFC;
+    //justify-content: space-around;
     border-radius: 20px;
+  }
+
+  header p{
+    color: #F2FFFC;
+    text-decoration: none;
+    text-align: right;
+    margin: auto;
+  }
+
+  header p:hover{
+      cursor: pointer;
+    transition: all 0.5s ease;
+  transform: scale(1.5);
+  }
+
+  #escolha{
+      font-weight: bold;
+      text-shadow: 0.05em 0.05em 0.05em rgb(29, 27, 27);
+      font-size: 20pt;
+  }
+
+  #escolha{
+      width: 15%;
+    font-weight: bold;
+    text-shadow: 0.05em 0.05em 0.05em rgb(29, 27, 27);
+    font-size: 20pt;
+}
+
+ .container{
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin:0 auto;
+} 
+
+table {
+    //height: 100%;
+    width: 400px;
+    //border: 2px solid rgb(39, 37, 37);
+    border-collapse: collapse;
+    background-color: rgb(39, 37, 37);
+    margin: 20px;
+    border-radius: 10px;
     padding:5px;
     text-align: center;
+    font-size: 16pt;
+  }
+  table tr {
+    border-radius: 20px;
+    border-bottom: 1px solid rgb(255, 255, 255);
+    border-collapse: collapse;
+    
+  }
+
+
+  .cadastrar input,select{
+    width: 98%;
+    height: 30px;
+    margin-bottom: 10px;
+    background-color: rgb(54, 50, 50);
+    color: #F2FFFC;
+  }
+
+
+  .vermelho{
+    background-color: rgba(255, 255, 255, 0);
+    border: solid 1px red;
+}
+
+.verde{
+    background-color: rgba(255, 255, 255, 0);
+    border: solid 1px green;
+}
+
+table button {
+    padding-left: 1px;
+    width: 20px;
+    margin-left: 10px;
+  }
+
+  form{
+    font-size: 14pt;
+      display: -ms-inline-grid;
+      flex-wrap: wrap;
+      align-items: flex-start;
   }

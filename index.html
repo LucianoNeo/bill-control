@@ -5,23 +5,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Controle de Contas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&family=Roboto:wght@400;700&family=Syne+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <label for="escolha"></label>
+<header>
+<h1>Bill Control - Controlando seus gastos eficientemente!</h1>
+<p onclick="mostraSecao('visualizar','cadastrar')">Visualizar</p>
+<p onclick="mostraSecao('cadastrar','visualizar')">Cadastrar</p>
+</header>
+<section id='visualizar'class="visualizar">
+<div id="escolha">
+    <p>Escolha o Mês</p>
     <select name="mes" id="mes">
     <option value="jan">Janeiro</option>
     <option value="fev">Fevereiro</option>
     </select>
     <input type="button" value="Selecionar" onclick="escolheMes()">
+</div>
+<div class="container">
+
     <table>
+        
         <thead>
-            <p>Contas Fixas</p>
+           
           <tr>
             <th>Data</th>
             <th>Serviço/Produto</th>
             <th>Valor</th>
-            <th>Tipo</th>
+            <th>Fixas 🏡</th>
           </tr>
         </thead>
         <tbody id="mostraFixas">
@@ -29,41 +43,69 @@
 
         <table>
             <thead>
-                <p>Lanches</p>
+                
               <tr>
                 <th>Data</th>
                 <th>Serviço/Produto</th>
                 <th>Valor</th>
-                <th>Tipo</th>
+                <th>Lanches 🍔</th>
               </tr>
             </thead>
             <tbody id="mostraLanches">
             </tbody>
     <table>
             <thead>
-                <p>Extras</p>
+               
               <tr>
                 <th>Data</th>
                 <th>Serviço/Produto</th>
                 <th>Valor</th>
-                <th>Tipo</th>
+                <th>Extras 🎁</th>
               </tr>
             </thead>
             <tbody id="mostraExtras">
             </tbody>
             <table>
                 <thead>
-                    <p>Parceladas</p>
+                    
                   <tr>
                     <th>Data</th>
                     <th>Serviço/Produto</th>
                     <th>Valor</th>
-                    <th>Tipo</th>
+                    <th>Parcel 🔢</th>
                   </tr>
                 </thead>
                 <tbody id="mostraParcelado">
                 </tbody>
-
+                </table>
+            </section>
+            </div>
+        <section class="cadastrar" id="cadastrar">
+            <p>Cadastro</p> 
+            <form action="">
+                <label for="mes"><Mês>Mês</label>
+                <select name="mes" id="mes">
+                    <option value="jan">Janeiro</option>
+                    <option value="fev">Fevereiro</option>
+                    <option value="mar">Março</option>
+                    <option value="abr">Abril</option>
+                </select><br>
+                <label for="data">Data:</label>
+                <input type="text" name="data" id="data"><br>
+                <label for="produto">Produto/Serviço:</label>
+                <input type="text" name="produto" id="produto"><br>
+                <label for="valor">Valor:</label>
+                <input type="valor" name="valor" id="valor"><br>
+                <label for="tipo">Tipo:</label>
+                <select name="tipo" id="tipo">
+                    <option value="fixas">Fixas</option>
+                    <option value="lanches">Lanches</option>
+                    <option value="extras">Extras</option>
+                    <option value="parceladas">Parceladas</option>
+                </select><br>
+                <input type="button" value="Cadastrar">
+            </form>
+        </section>
     <script src="./script.js"></script>
 </body>
 </html>

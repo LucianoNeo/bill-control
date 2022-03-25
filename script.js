@@ -1,22 +1,22 @@
-var gastos = {nome:'',  tipo: '', valor:'' , data: ''}
+var gastos = {id:'',nome:'',  tipo: '', valor:'' , data: ''}
 var jan = [gastos]
 var fev = [gastos]
 var mes = [jan,fev ]
+var campoTotalMes = document.getElementById('totalMes')
 
-
-var novo = {nome:'peças', tipo: 'parcelado', valor: Number(150), data: '10/01' }
-var novo1 = {nome:'internet', tipo: 'fixa', valor: Number(45), data: '15/01' }
-var novo2 = {nome:'dom augustinho', tipo: 'lanches', valor: Number(25), data: '23/01' }
-var novo3 = {nome:'farmacia', tipo: 'extras', valor: Number(50), data: '28/01' }
-var novo4 = {nome:'verduras', tipo: 'extras', valor: Number(25), data: '28/01' }
-var novo5 = {nome:'distrib', tipo: 'extras', valor: Number(35), data: '28/01' }
+var novo = {id:'001',nome:'peças', tipo: 'parcelado', valor: Number(150), data: '10/01' }
+var novo1 = {id:'002',nome:'internet', tipo: 'fixa', valor: Number(45), data: '15/01' }
+var novo2 = {id:'003',nome:'dom augustinho', tipo: 'lanches', valor: Number(25), data: '23/01' }
+var novo3 = {id:'004',nome:'farmacia', tipo: 'extras', valor: Number(50), data: '28/01' }
+var novo4 = {id:'005',nome:'verduras', tipo: 'extras', valor: Number(25), data: '28/01' }
+var novo5 = {id:'006',nome:'distrib', tipo: 'extras', valor: Number(35), data: '28/01' }
 jan.push(novo,novo1,novo2,novo3,novo4,novo5)
-var novo = {nome:'olga', tipo: 'parcelado', valor: Number(20), data: '05/01' }
-var novo1 = {nome:'net', tipo: 'fixa', valor: Number(35), data: '17/02' }
-var novo2 = {nome:'danidu', tipo: 'lanches', valor: Number(60), data: '18/02' }
-var novo3 = {nome:'farmacia', tipo: 'extras', valor: Number(5), data: '23/02' }
-var novo4 = {nome:'recanto', tipo: 'lanches', valor: Number(300), data: '18/02' }
-var novo5 = {nome:'garage20', tipo: 'lanches', valor: Number(80), data: '18/02' }
+var novo = {id:'007',nome:'olga', tipo: 'parcelado', valor: Number(20), data: '05/01' }
+var novo1 = {id:'008',nome:'net', tipo: 'fixa', valor: Number(35), data: '17/02' }
+var novo2 = {id:'009',nome:'danidu', tipo: 'lanches', valor: Number(60), data: '18/02' }
+var novo3 = {id:'010',nome:'farmacia', tipo: 'extras', valor: Number(5), data: '23/02' }
+var novo4 = {id:'011',nome:'recanto', tipo: 'lanches', valor: Number(300), data: '18/02' }
+var novo5 = {id:'012',nome:'garage20', tipo: 'lanches', valor: Number(80), data: '18/02' }
 fev.push(novo,novo1,novo2,novo3,novo4,novo5)
 
 
@@ -59,6 +59,10 @@ function desenhaTela(mes) {
     var res = document.getElementById('mostraFixas');
     var elemento ='';
     var total = Number(0)
+    var totalMes = Number(0)
+    
+    campoTotalMes.innerHTML = '<p>Total do mês: <br></p>'
+
     for (var i = 0; i < fixas.length; i++) {
         elemento += "<tr><td>" + fixas[i].data + " </td>";
         elemento += "<td>" + fixas[i].nome + "</td>";
@@ -69,7 +73,9 @@ function desenhaTela(mes) {
     }
     res.innerHTML = elemento;
     res.innerHTML += `<td>TOTAL=</td><td></td><td><strong>R$${total},00</strong></td></tr>` 
-    
+    totalMes += total
+
+
     var res = document.getElementById('mostraExtras');
     var elemento ='';
     var total = Number(0)
@@ -83,6 +89,7 @@ function desenhaTela(mes) {
     }
     res.innerHTML = elemento;
     res.innerHTML += `<td>TOTAL=</td><td></td><td><strong>R$${total},00</strong></td></tr>` 
+    totalMes += total
     
 
     var res = document.getElementById('mostraLanches');
@@ -98,7 +105,7 @@ function desenhaTela(mes) {
     }
     res.innerHTML = elemento;
     res.innerHTML += `<td>TOTAL=</td><td></td><td><strong>R$${total},00</strong></td></tr>` 
-
+    totalMes += total
 
     var res = document.getElementById('mostraParcelado');
     var elemento ='';
@@ -114,45 +121,38 @@ function desenhaTela(mes) {
     }
     res.innerHTML = elemento;
     res.innerHTML += `<td>TOTAL=</td><td></td><td><strong>R$${total},00</strong></td></tr>`
+    totalMes += total
+    
+    
     document.getElementById('rodape').style.position='relative'
     document.getElementById('rodape').style.width='103%'
     document.getElementById('rodape').style.height='40px'
     document.getElementById('rodape').style.bottom='-10px'
+    campoTotalMes.style.display='block'
+    campoTotalMes.innerText += `R$ ${totalMes},00`
 }
 
 
 function mostraSecao(secao,desligar) {
     var ver = document.getElementById(secao)
     var apagar = document.getElementById(desligar)
+    if(secao == 'cadastrar'){
+        document.getElementById('rodape').style.position='relative'
+        campoTotalMes.style.display='none'
+    }
     ver.style.display ='block'
     apagar.style.display ='none'
     document.getElementById('bv').style.display='none'
-    if(secao == 'cadastro'){
-        document.getElementById('rodape').style.position='relative' 
-    }
+    
     
     }
 
 
 
 $(document).ready(function(){
-	//Telefone
-	$("#fone").mask("(00) 00000-0000");
-
-	//CEP
-	$("#cep").mask("99999-999");
-
-	//CPF
-	$("#cpf").mask("999.999.999-99");
-
-	//CNPJ
-	$("#cnpj").mask("99.999.999/9999-99");
-
 	//Data
 	$("#data").mask("99/99");
 
 	//Dinheiro
 	$('#dinheiro1').mask('000.000.000.000.000,00' , { reverse : true});
-
-	$('#valor').mask("#.##0,00" , { reverse:true});
 });

@@ -208,3 +208,20 @@ table button {
     text-align: center;
     margin:0;
   }
+
+  .total{
+    display: none;
+    float: right;
+    margin-top: 35px;
+    margin-right: 30px;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 20px;
+    border: solid 2px rgb(158, 145, 145);
+    width: 150px;    
+    background-color:rgb(54, 50, 50);
+    color: white;
+    font-size: 15pt;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.521);
+  }

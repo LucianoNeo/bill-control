@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Controle de Contas</title>
+    <title>Controle de Gastos</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&family=Roboto:wght@400;700&family=Syne+Mono&display=swap" rel="stylesheet">
@@ -22,8 +22,10 @@
 <p onclick="mostraSecao('cadastrar','visualizar')">Cadastrar 📑</p>
 </div>
 </header>
+<div id="totalMes" class="total">
+</div>
 <div class="bv" id="bv">
-  <p>Seja bem vindo ao Expense Control, seu controle de contas diárias!</p>
+  <p>Seja bem vindo ao Expense Control, seu controle de gastos diários!</p>
   <img src="https://cdn-icons-png.flaticon.com/512/5229/5229354.png" alt="">
 </div>
 <section id='visualizar'class="visualizar">
@@ -35,6 +37,7 @@
     </select>
     <input type="button" value="Selecionar" onclick="escolheMes()">
 </div>
+
 <div class="container">
 
     <table>
@@ -88,6 +91,8 @@
                 <tbody id="mostraParcelado">
                 </tbody>
                 </table>
+
+                
             </section>
             </div>
         <section class="cadastrar" id="cadastrar">

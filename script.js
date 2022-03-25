@@ -62,7 +62,7 @@ function desenhaTela(mes) {
     var totalMes = Number(0)
     
     campoTotalMes.innerHTML = '<p>Total do mês: <br></p>'
-
+    document.getElementById('rodape').style.position='absolute'
     for (var i = 0; i < fixas.length; i++) {
         elemento += "<tr><td>" + fixas[i].data + " </td>";
         elemento += "<td>" + fixas[i].nome + "</td>";
@@ -137,6 +137,7 @@ function mostraSecao(secao,desligar) {
     var ver = document.getElementById(secao)
     var apagar = document.getElementById(desligar)
     if(secao == 'cadastrar'){
+        resetaTabelas()
         document.getElementById('rodape').style.position='relative'
         campoTotalMes.style.display='none'
     }
@@ -147,7 +148,17 @@ function mostraSecao(secao,desligar) {
     
     }
 
+function resetaTabelas() {
+    var tableFixas = document.getElementById('mostraFixas')
+    var tableLanches = document.getElementById('mostraLanches')
+    var tableExtras = document.getElementById('mostraExtras')
+    var tableParc = document.getElementById('mostraParcelado')
 
+    tableFixas.innerHTML =''
+    tableLanches.innerHTML =''
+    tableExtras.innerHTML =''
+    tableParc.innerHTML =''
+}
 
 $(document).ready(function(){
 	//Data

@@ -1,27 +1,23 @@
-var gastos = {id:'',nome:'',  tipo: '', valor:'' , data: ''}
+var gastos = {id:'',nome:'',  tipo: '', valor:'' , data: '',parcela:'',totalParcela:''}
 var jan = [gastos]
 var fev = [gastos]
-var mes = [jan,fev ]
+var mar = [gastos]
+var abr = [gastos]
+var mai = [gastos]
+var jun = [gastos]
+var jul = [gastos]
+var ago = [gastos]
+var set = [gastos]
+var out = [gastos]
+var nov = [gastos]
+var dez = [gastos]
+
+var mes = [jan,fev,mar,abr,mai,jun,jul,ago,set,out,nov,dez]
 var campoTotalMes = document.getElementById('totalMes')
+var id = 000
 
-var novo = {id:'001',nome:'peças', tipo: 'parcelado', valor: Number(150), data: '10/01' }
-var novo1 = {id:'002',nome:'internet', tipo: 'fixa', valor: Number(45), data: '15/01' }
-var novo2 = {id:'003',nome:'dom augustinho', tipo: 'lanches', valor: Number(25), data: '23/01' }
-var novo3 = {id:'004',nome:'farmacia', tipo: 'extras', valor: Number(50), data: '28/01' }
-var novo4 = {id:'005',nome:'verduras', tipo: 'extras', valor: Number(25), data: '28/01' }
-var novo5 = {id:'006',nome:'distrib', tipo: 'extras', valor: Number(35), data: '28/01' }
-jan.push(novo,novo1,novo2,novo3,novo4,novo5)
-var novo = {id:'007',nome:'olga', tipo: 'parcelado', valor: Number(20), data: '05/01' }
-var novo1 = {id:'008',nome:'net', tipo: 'fixa', valor: Number(35), data: '17/02' }
-var novo2 = {id:'009',nome:'danidu', tipo: 'lanches', valor: Number(60), data: '18/02' }
-var novo3 = {id:'010',nome:'farmacia', tipo: 'extras', valor: Number(5), data: '23/02' }
-var novo4 = {id:'011',nome:'recanto', tipo: 'lanches', valor: Number(300), data: '18/02' }
-var novo5 = {id:'012',nome:'garage20', tipo: 'lanches', valor: Number(80), data: '18/02' }
-fev.push(novo,novo1,novo2,novo3,novo4,novo5)
-
-
-
-
+var novo = {id:id++,nome:'produto',  tipo: 'fixa', valor:'25' , data: '21',parcela:'',totalParcela:''}
+jan.push(novo)
 
 
 function escolheMes() {
@@ -66,13 +62,14 @@ function desenhaTela(mes) {
     for (var i = 0; i < fixas.length; i++) {
         elemento += "<tr><td>" + fixas[i].data + " </td>";
         elemento += "<td>" + fixas[i].nome + "</td>";
-        elemento += "<td>R$" + fixas[i].valor + ",00</td>";
+        elemento += "<td>R$" + fixas[i].valor + "</td>";
         total += Number(fixas[i].valor)
         elemento += "<td>" + "<button class='verde' onclick=''>📝</button>"+
-        "<button class='vermelho' onclick=''>❌</button>"+"</td></tr>";
+        `<button class='vermelho' onclick='remove(${fixas[i].nome})'>❌</button></td></tr>`
+
     }
     res.innerHTML = elemento;
-    res.innerHTML += `<td>TOTAL=</td><td></td><td><strong>R$${total},00</strong></td></tr>` 
+    res.innerHTML += `<td>TOTAL=</td><td></td><td><strong>R$${total}</strong></td></tr>` 
     totalMes += total
 
 
@@ -82,13 +79,13 @@ function desenhaTela(mes) {
     for (var i = 0; i < extras.length; i++) {
         elemento += "<tr><td>" + extras[i].data + " </td>";
         elemento += "<td>" + extras[i].nome + "</td>";
-        elemento += "<td>R$" + extras[i].valor + ",00</td>";
+        elemento += "<td>R$" + extras[i].valor + "</td>";
         total += Number(extras[i].valor)
         elemento += "<td>" + "<button class='verde' onclick=''>📝</button>"+
         "<button class='vermelho' onclick=''>❌</button>"+"</td>";
     }
     res.innerHTML = elemento;
-    res.innerHTML += `<td>TOTAL=</td><td></td><td><strong>R$${total},00</strong></td></tr>` 
+    res.innerHTML += `<td>TOTAL=</td><td></td><td><strong>R$${total}</strong></td></tr>` 
     totalMes += total
     
 
@@ -98,29 +95,33 @@ function desenhaTela(mes) {
     for (var i = 0; i < lanches.length; i++) {
         elemento += "<tr><td>" + lanches[i].data + " </td>";
         elemento += "<td>" + lanches[i].nome + "</td>";
-        elemento += "<td>R$" + lanches[i].valor + ",00</td>";
+        elemento += "<td>R$" + lanches[i].valor + "</td>";
         total += Number(lanches[i].valor)
         elemento += "<td>" + "<button class='verde' onclick=''>📝</button>"+
         "<button class='vermelho' onclick=''>❌</button>"+"</td></tr>";
     }
     res.innerHTML = elemento;
-    res.innerHTML += `<td>TOTAL=</td><td></td><td><strong>R$${total},00</strong></td></tr>` 
+    res.innerHTML += `<td>TOTAL=</td><td></td><td><strong>R$${total}</strong></td></tr>` 
     totalMes += total
 
     var res = document.getElementById('mostraParcelado');
     var elemento ='';
     var total = Number(0)
+    let parcela = document.getElementById('parcela').value
+    let totalParcelas = document.getElementById('totalParcelas').value
+
     for (var i = 0; i < parcelado.length; i++) {
         elemento += "<tr><td>" + parcelado[i].data + " </td>";
+        //elemento += "<td> (" + parcelado[i].parcela + " de " + parcelado[i].totalParcela+") " + parcelado[i].nome + "</td>";
         elemento += "<td>" + parcelado[i].nome + "</td>";
-        elemento += "<td>R$" + parcelado[i].valor + ",00</td>";
+        elemento += "<td>R$" + parcelado[i].valor + "</td>";
         total += parcelado[i].valor
         elemento += "<td>" + "<button class='verde' onclick=''>📝</button>"+
         "<button class='vermelho' onclick=''>❌</button>"+"</td><tr>";
         
     }
     res.innerHTML = elemento;
-    res.innerHTML += `<td>TOTAL=</td><td></td><td><strong>R$${total},00</strong></td></tr>`
+    res.innerHTML += `<td>TOTAL=</td><td></td><td><strong>R$${total}</strong></td></tr>`
     totalMes += total
     
     
@@ -129,7 +130,7 @@ function desenhaTela(mes) {
     document.getElementById('rodape').style.height='40px'
     document.getElementById('rodape').style.bottom='-10px'
     campoTotalMes.style.display='block'
-    campoTotalMes.innerText += `R$ ${totalMes},00`
+    campoTotalMes.innerText += `R$ ${totalMes}`
 }
 
 
@@ -144,7 +145,7 @@ function mostraSecao(secao,desligar) {
     ver.style.display ='block'
     apagar.style.display ='none'
     document.getElementById('bv').style.display='none'
-    
+    resetaCadastro()
     
     }
 
@@ -165,5 +166,133 @@ $(document).ready(function(){
 	$("#data").mask("99/99");
 
 	//Dinheiro
-	$('#dinheiro1').mask('000.000.000.000.000,00' , { reverse : true});
+	$('#valor').mask('000.000.000.000.000,00' , { reverse : true});
 });
+
+
+function ligaParcelas() {
+    var tipo = document.getElementById('tipo')
+    if (tipo.value == 'parcelado')
+    {
+    document.getElementById('parcelas').style.display='flex'
+    }else{
+        document.getElementById('parcelas').style.display='none'
+    }
+    
+}
+
+function cadastrar() {
+
+let mesSel = document.getElementById('mesCad').value
+let tipoCad = document.getElementById('tipo').value
+let data = document.getElementById('data').value
+let produto =document.getElementById('produto').value
+let valor = document.getElementById('valor').value
+let parcela = document.getElementById('parcela').value
+let totalParcelas = document.getElementById('totalParcelas').value
+let novo = {id:id++, nome:produto,tipo:tipoCad,valor:parseInt(valor),data:data}
+
+if(data =='' || produto =='' || valor =='' ){
+    alert('Você deve preencher todos os campos!')
+}else{
+    if (tipoCad =='fixa'){
+    
+    for (let i = 0; i < mes.length; i++) {
+        mes[i].push(novo)
+    }
+    alert('Cadastro realizado com sucesso!')
+    mostraSecao('visualizar','cadastrar')
+    }
+    else if(tipoCad == 'parcelado'){
+        let novo = {id:id++, nome:produto,tipo:tipoCad,valor:parseInt(valor),data:data,parcela:parcela,totalParcela:totalParcelas}
+        let indice 
+        switch (mesSel) {
+            case "jan":
+            indice = Number(0)
+            break
+            case "fev":
+                indice = Number(1)
+                break
+            case "mar":
+                indice = Number(2)
+                break    
+        }
+        for (let index = indice; index < Number(totalParcelas); index++ ) {
+            mes[index].push(novo)
+            alert(`Cadastro realizado com sucesso! MES ${index}`)
+        }
+            
+            mostraSecao('visualizar','cadastrar')
+    } else{
+        switch (mesSel) {
+            case "jan":
+            jan.push(novo)
+            alert('Cadastro realizado com sucesso!')
+            mostraSecao('visualizar','cadastrar')
+            break
+            case "fev":
+                fev.push(novo)
+                alert('Cadastro realizado com sucesso!')
+                mostraSecao('visualizar','cadastrar')
+                break
+            case "mar":
+                mar.push(novo)
+                break    
+         
+            case "abr":
+                abr.push(novo)
+                break
+            case "mai":
+                mai.push(novo)
+                break
+            case "jun":
+                jun.push(novo)
+                break
+            case "jul":
+                jul.push(novo)
+                break
+            case "ago":
+                ago.push(novo)
+                break
+            case "set":
+                set.push(novo)
+                break 
+            case "out":
+                out.push(novo)
+                break
+            case "nov":
+                nov.push(novo)
+                break
+            case "dez":
+                dez.push(novo)
+                break   
+        }
+}
+
+}
+}
+
+
+
+function resetaCadastro(){
+    let mesSel = document.getElementById('mesCad')
+    let tipo = document.getElementById('tipo')
+    let data = document.getElementById('data')
+    let produto =document.getElementById('produto')
+    let valor = document.getElementById('valor')
+    let parcela = document.getElementById('parcela')
+    let totalParcelas = document.getElementById('totalParcelas')
+    mesSel.value=''
+    tipo.value=''
+    data.value=''
+    produto.value=''
+    valor.value=''
+    parcela.value=''
+    totalParcelas.value=''
+}
+
+
+function remove(nomeInd) {
+    //console.log(nomeInd)
+    //console.log(mes.indexOf(nome))
+}

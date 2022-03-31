@@ -50,6 +50,17 @@ body{
   color: #F2FFFC;
 }
 
+.parcelas {
+  display:none;
+  margin: auto;
+}
+
+
+.parcelas input {
+  width: 50px;
+  text-align: center;
+  margin-right: 10px;
+}
 
 header{
     width: 98.4%;
@@ -226,3 +237,5 @@ table button {
     font-size: 15pt;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.521);
   }
+
+  

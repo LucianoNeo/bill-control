@@ -99,26 +99,32 @@
             <p>Cadastro</p> 
             <form action="">
                 <label for="mes"><Mês>Mês</label>
-                <select name="mes" id="mes">
+                <select name="mes" id="mesCad">
                     <option value="jan">Janeiro</option>
                     <option value="fev">Fevereiro</option>
                     <option value="mar">Março</option>
                     <option value="abr">Abril</option>
                 </select><br>
+                <label for="tipo">Tipo:</label>
+                <select name="tipo" id="tipo" onchange="ligaParcelas()">
+                  <option value="fixa">Fixas</option>
+                  <option value="lanches">Lanches</option>
+                  <option value="extras">Extras</option>
+                  <option value="parcelado">Parceladas</option>
+                </select><br>
+                <div class='parcelas' id="parcelas">
+                  <label for="parcela">Parcela:</label>
+                  <input type="number" name="parcela" id="parcela"><br>
+                  <label for="data">de:</label>
+                <input type="number" name="totalParcelas" id="totalParcelas"><br>
+                </div>
                 <label for="data">Data:</label>
                 <input type="text" name="data" id="data"><br>
                 <label for="produto">Produto/Serviço:</label>
                 <input type="text" name="produto" id="produto"><br>
                 <label for="valor">Valor:</label>
-                <input type="valor" name="valor" id="valor"><br>
-                <label for="tipo">Tipo:</label>
-                <select name="tipo" id="tipo">
-                    <option value="fixas">Fixas</option>
-                    <option value="lanches">Lanches</option>
-                    <option value="extras">Extras</option>
-                    <option value="parceladas">Parceladas</option>
-                </select><br>
-                <input type="button" value="Cadastrar">
+                <input type="text" name="valor" id="valor"><br>             
+                <input type="button" value="Cadastrar" onclick="cadastrar()">
             </form>
         </section>
         <footer id="rodape"> <p>Developed by LucianoNeo ©2022</p></footer>

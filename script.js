@@ -11,13 +11,13 @@ var out = []
 var nov = []
 var dez = []
 
-var mes = [jan,fev,mar,abr,mai,jun,jul,ago,set,out,nov,dez]
+var meses = {jan,fev,mar,abr,mai,jun,jul,ago,set,out,nov,dez}
 var campoTotalMes = document.getElementById('totalMes')
 var id = Number(000)
 var novo = {nomeMes:'jan',id:id++,nome:'produto',  tipo: 'fixa', valor:'25' , data: '21',parcela:'',totalParcela:''}
 jan.push(novo)
-var novo = {nomeMes:'fev',id:id++,nome:'produto2',  tipo: 'lanches', valor:'25' , data: '21',parcela:'',totalParcela:''}
-fev.push(novo)
+var novo = {nomeMes:'jan',id:id++,nome:'produto2',  tipo: 'fixa', valor:'25' , data: '21',parcela:'',totalParcela:''}
+jan.push(novo)
 
 function escolheMes() {
     var escolha = document.getElementById('mes')
@@ -47,11 +47,11 @@ function filtraLanches(conta){
 }
 
 
-function desenhaTela(mes) {
-    var fixas = mes.filter(filtraFixa);
-    var extras = mes.filter(filtraExtras);
-    var parcelado = mes.filter(filtraParcelado);
-    var lanches = mes.filter(filtraLanches);
+function desenhaTela(meses) {
+    var fixas = meses.filter(filtraFixa);
+    var extras = meses.filter(filtraExtras);
+    var parcelado = meses.filter(filtraParcelado);
+    var lanches = meses.filter(filtraLanches);
     var res = document.getElementById('mostraFixas');
     var elemento ='';
     var total = Number(0)
@@ -200,8 +200,8 @@ if(data =='' || produto =='' || valor =='' ){
 }else{
     if (tipoCad =='fixa'){
     
-    for (let i = 0; i < mes.length; i++) {
-        mes[i].push(novo)
+    for (let i = 0; i < meses.length; i++) {
+        meses[i].push(novo)
     }
     alert('Cadastro realizado com sucesso!')
     mostraSecao('visualizar','cadastrar')
@@ -222,7 +222,7 @@ if(data =='' || produto =='' || valor =='' ){
                 break    
         }
         for (let index = indice; index < Number(totalParcelas); index++ ) {
-            mes[index].push(novo)
+            meses[index].push(novo)
             //novo.id++
             gerenciar()
         }
@@ -302,69 +302,33 @@ function resetaCadastro(){
 
 
 function remove(id,nomeMes) {
-
-var arrayToRemove = null;
-
-switch(nomeMes){
-    case "jan":
-    arrayToRemove = jan
-    break
-    case "fev":
-    arrayToRemove = fev
-    break
-}
-arrayToRemove = arrayToRemove.filter(function(obj) {
-    return id != id
-    });
-//arrayToRemove.splice(id,1)
-alert("item removido id: "+id +"mes: "+ nomeMes)
-console.log(arrayToRemove)
+  
+    console.log(meses[nomeMes])
+    meses[nomeMes] = meses[nomeMes].filter(item => item.id != id)
+    console.log(meses[nomeMes])
     resetaTabelas()
     gerenciar()
 }
 
-var i = 1
-var j = 0
-//console.log(mes[i][j].nomeMes)
-
 
 function gerenciar(){
     var resultado = document.getElementById("mostraGer");
-    var janEle ='';
-    var fevEle ='';
+    var elemento ='';
+    
     
     for (var i = 0; i < jan.length; i++) {
-        janEle += "<tr><td>" + jan[i].id + " </td>";
-        janEle += "<td>" + jan[i].nomeMes + " </td>";
-        janEle += "<td>" + jan[i].data + " </td>";
-        janEle += "<td>" + jan[i].nome + "</td>";
-        janEle += "<td>R$" + jan[i].valor + "</td>";
-        janEle += "<td>" + jan[i].tipo + "</td>";
-        janEle += "<td>" + jan[i].parcela + "</td>";
-        janEle += "<td>" + jan[i].totalParcela + "</td>";
-        janEle += "<td>" + "<button class='verde' onclick=''>📝</button>"+
+        elemento += "<tr><td>" + jan[i].id + " </td>";
+        elemento += "<td>" + jan[i].nomeMes + " </td>";
+        elemento += "<td>" + jan[i].data + " </td>";
+        elemento += "<td>" + jan[i].nome + "</td>";
+        elemento += "<td>R$" + jan[i].valor + "</td>";
+        elemento += "<td>" + jan[i].tipo + "</td>";
+        elemento += "<td>" + jan[i].parcela + "</td>";
+        elemento += "<td>" + jan[i].totalParcela + "</td>";
+        elemento += "<td>" + "<button class='verde' onclick=''>📝</button>"+
         `<button class='vermelho' onclick='remove(${jan[i].id})'>❌</button></td></tr>`
 
     }
-    resultado.innerHTML = janEle
-    for (var i = 0; i < fev.length; i++) {
-        fevEle += "<tr><td>" + fev[i].id + " </td>";
-        fevEle += "<td>" + fev[i].nomeMes + " </td>";
-        fevEle += "<td>" + fev[i].data + " </td>";
-        fevEle += "<td>" + fev[i].nome + "</td>";
-        fevEle += "<td>R$" + fev[i].valor + "</td>";
-        fevEle += "<td>" + fev[i].tipo + "</td>";
-        fevEle += "<td>" + fev[i].parcela + "</td>";
-        fevEle += "<td>" + fev[i].totalParcela + "</td>";
-        fevEle += "<td>" + "<button class='verde' onclick=''>📝</button>"+
-        `<button class='vermelho' onclick='remove(${fev[i].id})'>❌</button></td></tr>`
+    resultado.innerHTML = elemento
 
-    }
-    resultado.innerHTML += fevEle
 }
-
-   // jan = jan.filter( jan => {
-    //     return jan.id != id
-    // } )
-        //resetaTabelas()
-    //gerenciar()

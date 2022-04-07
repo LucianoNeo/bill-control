@@ -1,24 +1,23 @@
-var gastos = {id:'',nome:'',  tipo: '', valor:'' , data: '',parcela:'',totalParcela:''}
-var jan = [gastos]
-var fev = [gastos]
-var mar = [gastos]
-var abr = [gastos]
-var mai = [gastos]
-var jun = [gastos]
-var jul = [gastos]
-var ago = [gastos]
-var set = [gastos]
-var out = [gastos]
-var nov = [gastos]
-var dez = [gastos]
+var jan = []
+var fev = []
+var mar = []
+var abr = []
+var mai = []
+var jun = []
+var jul = []
+var ago = []
+var set = []
+var out = []
+var nov = []
+var dez = []
 
 var mes = [jan,fev,mar,abr,mai,jun,jul,ago,set,out,nov,dez]
 var campoTotalMes = document.getElementById('totalMes')
-var id = 000
-
-var novo = {id:id++,nome:'produto',  tipo: 'fixa', valor:'25' , data: '21',parcela:'',totalParcela:''}
+var id = Number(000)
+var novo = {nomeMes:'jan',id:id++,nome:'produto',  tipo: 'fixa', valor:'25' , data: '21',parcela:'',totalParcela:''}
 jan.push(novo)
-
+var novo = {nomeMes:'fev',id:id++,nome:'produto2',  tipo: 'lanches', valor:'25' , data: '21',parcela:'',totalParcela:''}
+fev.push(novo)
 
 function escolheMes() {
     var escolha = document.getElementById('mes')
@@ -58,14 +57,14 @@ function desenhaTela(mes) {
     var totalMes = Number(0)
     
     campoTotalMes.innerHTML = '<p>Total do mês: <br></p>'
-    document.getElementById('rodape').style.position='absolute'
+    //document.getElementById('rodape').style.position='absolute'
     for (var i = 0; i < fixas.length; i++) {
         elemento += "<tr><td>" + fixas[i].data + " </td>";
         elemento += "<td>" + fixas[i].nome + "</td>";
         elemento += "<td>R$" + fixas[i].valor + "</td>";
         total += Number(fixas[i].valor)
         elemento += "<td>" + "<button class='verde' onclick=''>📝</button>"+
-        `<button class='vermelho' onclick='remove(${fixas[i].nome})'>❌</button></td></tr>`
+        `<button class='vermelho' onclick='remove("${fixas[i].id}","${fixas[i].nomeMes}")'>❌</button></td></tr>`
 
     }
     res.innerHTML = elemento;
@@ -82,7 +81,7 @@ function desenhaTela(mes) {
         elemento += "<td>R$" + extras[i].valor + "</td>";
         total += Number(extras[i].valor)
         elemento += "<td>" + "<button class='verde' onclick=''>📝</button>"+
-        "<button class='vermelho' onclick=''>❌</button>"+"</td>";
+        `<button class='vermelho' onclick='remove("${extras[i].id}","${extras[i].nomeMes}")'>❌</button></td></tr>`
     }
     res.innerHTML = elemento;
     res.innerHTML += `<td>TOTAL=</td><td></td><td><strong>R$${total}</strong></td></tr>` 
@@ -98,7 +97,7 @@ function desenhaTela(mes) {
         elemento += "<td>R$" + lanches[i].valor + "</td>";
         total += Number(lanches[i].valor)
         elemento += "<td>" + "<button class='verde' onclick=''>📝</button>"+
-        "<button class='vermelho' onclick=''>❌</button>"+"</td></tr>";
+        `<button class='vermelho' onclick='remove("${lanches[i].id}","${lanches[i].nomeMes}")'>❌</button></td></tr>`
     }
     res.innerHTML = elemento;
     res.innerHTML += `<td>TOTAL=</td><td></td><td><strong>R$${total}</strong></td></tr>` 
@@ -113,11 +112,11 @@ function desenhaTela(mes) {
     for (var i = 0; i < parcelado.length; i++) {
         elemento += "<tr><td>" + parcelado[i].data + " </td>";
         //elemento += "<td> (" + parcelado[i].parcela + " de " + parcelado[i].totalParcela+") " + parcelado[i].nome + "</td>";
-        elemento += "<td>" + parcelado[i].nome + "</td>";
+        elemento += "<td>" + parcelado[i].nome + " " + parcelado[i].parcela +"/"+ parcelado[i].totalParcela+"</td>";
         elemento += "<td>R$" + parcelado[i].valor + "</td>";
         total += parcelado[i].valor
         elemento += "<td>" + "<button class='verde' onclick=''>📝</button>"+
-        "<button class='vermelho' onclick=''>❌</button>"+"</td><tr>";
+        `<button class='vermelho' onclick='remove("${parcelado[i].id}","${parcelado[i].nomeMes}")'>❌</button></td></tr>`
         
     }
     res.innerHTML = elemento;
@@ -125,12 +124,13 @@ function desenhaTela(mes) {
     totalMes += total
     
     
-    document.getElementById('rodape').style.position='relative'
-    document.getElementById('rodape').style.width='103%'
-    document.getElementById('rodape').style.height='40px'
-    document.getElementById('rodape').style.bottom='-10px'
+    // document.getElementById('rodape').style.position='relative'
+    // document.getElementById('rodape').style.width='103%'
+    // document.getElementById('rodape').style.height='40px'
+    // document.getElementById('rodape').style.bottom='-10px'
     campoTotalMes.style.display='block'
     campoTotalMes.innerText += `R$ ${totalMes}`
+    gerenciar()
 }
 
 
@@ -139,7 +139,7 @@ function mostraSecao(secao,desligar) {
     var apagar = document.getElementById(desligar)
     if(secao == 'cadastrar'){
         resetaTabelas()
-        document.getElementById('rodape').style.position='relative'
+        //document.getElementById('rodape').style.position='relative'
         campoTotalMes.style.display='none'
     }
     ver.style.display ='block'
@@ -202,6 +202,7 @@ if(data =='' || produto =='' || valor =='' ){
     }
     alert('Cadastro realizado com sucesso!')
     mostraSecao('visualizar','cadastrar')
+    gerenciar()
     }
     else if(tipoCad == 'parcelado'){
         let novo = {id:id++, nome:produto,tipo:tipoCad,valor:parseInt(valor),data:data,parcela:parcela,totalParcela:totalParcelas}
@@ -219,7 +220,8 @@ if(data =='' || produto =='' || valor =='' ){
         }
         for (let index = indice; index < Number(totalParcelas); index++ ) {
             mes[index].push(novo)
-            alert(`Cadastro realizado com sucesso! MES ${index}`)
+            //novo.id++
+            gerenciar()
         }
             
             mostraSecao('visualizar','cadastrar')
@@ -228,11 +230,13 @@ if(data =='' || produto =='' || valor =='' ){
             case "jan":
             jan.push(novo)
             alert('Cadastro realizado com sucesso!')
+            gerenciar()
             mostraSecao('visualizar','cadastrar')
             break
             case "fev":
                 fev.push(novo)
                 alert('Cadastro realizado com sucesso!')
+                gerenciar()
                 mostraSecao('visualizar','cadastrar')
                 break
             case "mar":
@@ -292,7 +296,47 @@ function resetaCadastro(){
 }
 
 
-function remove(nomeInd) {
-    //console.log(nomeInd)
-    //console.log(mes.indexOf(nome))
+function remove(id,nomeMes) {
+    nomeMes.splice(id,1)
 }
+
+function gerenciar(){
+    var resultado = document.getElementById("mostraGer");
+    var janEle ='';
+    var fevEle ='';
+    
+    for (var i = 0; i < jan.length; i++) {
+        janEle += "<tr><td>" + jan[i].id + " </td>";
+        janEle += "<td>" + jan[i].nomeMes + " </td>";
+        janEle += "<td>" + jan[i].data + " </td>";
+        janEle += "<td>" + jan[i].nome + "</td>";
+        janEle += "<td>R$" + jan[i].valor + "</td>";
+        janEle += "<td>" + jan[i].tipo + "</td>";
+        janEle += "<td>" + jan[i].parcela + "</td>";
+        janEle += "<td>" + jan[i].totalParcela + "</td>";
+        janEle += "<td>" + "<button class='verde' onclick=''>📝</button>"+
+        `<button class='vermelho' onclick='remove(${jan[i].id})'>❌</button></td></tr>`
+
+    }
+    resultado.innerHTML = janEle
+    for (var i = 0; i < fev.length; i++) {
+        fevEle += "<tr><td>" + fev[i].id + " </td>";
+        fevEle += "<td>" + fev[i].nomeMes + " </td>";
+        fevEle += "<td>" + fev[i].data + " </td>";
+        fevEle += "<td>" + fev[i].nome + "</td>";
+        fevEle += "<td>R$" + fev[i].valor + "</td>";
+        fevEle += "<td>" + fev[i].tipo + "</td>";
+        fevEle += "<td>" + fev[i].parcela + "</td>";
+        fevEle += "<td>" + fev[i].totalParcela + "</td>";
+        fevEle += "<td>" + "<button class='verde' onclick=''>📝</button>"+
+        `<button class='vermelho' onclick='remove(${fev[i].id})'>❌</button></td></tr>`
+
+    }
+    resultado.innerHTML += fevEle
+}
+
+   // jan = jan.filter( jan => {
+    //     return jan.id != id
+    // } )
+        //resetaTabelas()
+    //gerenciar()

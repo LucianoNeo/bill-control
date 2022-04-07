@@ -238,4 +238,11 @@ table button {
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.521);
   }
 
-  
+  .gerenciamento{
+    //display: none;
+    
+  }
+  .gerenciamento table{
+    margin:0;
+    width: 100%;
+  }

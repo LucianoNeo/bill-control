@@ -29,6 +29,7 @@ function escolheMes() {
 }
 
 
+
 function filtraFixa(conta){
     return conta.tipo == 'fixa';
 }
@@ -82,6 +83,7 @@ function desenhaTela(mes) {
         total += Number(extras[i].valor)
         elemento += "<td>" + "<button class='verde' onclick=''>📝</button>"+
         `<button class='vermelho' onclick='remove("${extras[i].id}","${extras[i].nomeMes}")'>❌</button></td></tr>`
+        
     }
     res.innerHTML = elemento;
     res.innerHTML += `<td>TOTAL=</td><td></td><td><strong>R$${total}</strong></td></tr>` 
@@ -98,6 +100,7 @@ function desenhaTela(mes) {
         total += Number(lanches[i].valor)
         elemento += "<td>" + "<button class='verde' onclick=''>📝</button>"+
         `<button class='vermelho' onclick='remove("${lanches[i].id}","${lanches[i].nomeMes}")'>❌</button></td></tr>`
+
     }
     res.innerHTML = elemento;
     res.innerHTML += `<td>TOTAL=</td><td></td><td><strong>R$${total}</strong></td></tr>` 
@@ -228,12 +231,14 @@ if(data =='' || produto =='' || valor =='' ){
     } else{
         switch (mesSel) {
             case "jan":
+            novo.nomeMes='jan'
             jan.push(novo)
             alert('Cadastro realizado com sucesso!')
             gerenciar()
             mostraSecao('visualizar','cadastrar')
             break
             case "fev":
+                novo.nomeMes='fev'
                 fev.push(novo)
                 alert('Cadastro realizado com sucesso!')
                 gerenciar()
@@ -297,8 +302,31 @@ function resetaCadastro(){
 
 
 function remove(id,nomeMes) {
-    nomeMes.splice(id,1)
+
+var arrayToRemove = null;
+
+switch(nomeMes){
+    case "jan":
+    arrayToRemove = jan
+    break
+    case "fev":
+    arrayToRemove = fev
+    break
 }
+arrayToRemove = arrayToRemove.filter(function(obj) {
+    return id != id
+    });
+//arrayToRemove.splice(id,1)
+alert("item removido id: "+id +"mes: "+ nomeMes)
+console.log(arrayToRemove)
+    resetaTabelas()
+    gerenciar()
+}
+
+var i = 1
+var j = 0
+//console.log(mes[i][j].nomeMes)
+
 
 function gerenciar(){
     var resultado = document.getElementById("mostraGer");

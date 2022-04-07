@@ -21,19 +21,19 @@ body{
     padding-right: 25px;
     padding-top: 2px;
     padding-bottom: 20px;
-    margin-top:20px;
-    margin-left: auto;
-    margin-right: auto;
+    margin:auto;
+    margin-top: 20px;
     width: 280px;
-    justify-content:space-between;
     background-color: rgb(39, 37, 37);;
     font-weight: bold;
     text-shadow: 0.05em 0.05em 0.05em rgb(29, 27, 27);
     display: none;
     border-radius: 10px;
+    
 }
 
 .cadastrar p{
+  
     font-weight: bold;
       text-shadow: 0.05em 0.05em 0.05em rgb(29, 27, 27);
       font-size: 20pt;
@@ -44,7 +44,6 @@ body{
   font-family: 'PT Sans Narrow', sans-serif;
   font-size: 15pt;
   width: 100%;
-  height: 30px;
   margin-bottom: 10px;
   background-color: rgb(54, 50, 50);
   color: #F2FFFC;
@@ -240,6 +239,7 @@ table button {
 
   .gerenciamento{
     //display: none;
+    margin-top:20px;
     
   }
   .gerenciamento table{

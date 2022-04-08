@@ -191,7 +191,7 @@ let produto =document.getElementById('produto').value
 let valor = document.getElementById('valor').value
 let parcela = document.getElementById('parcela').value
 let totalParcelas = document.getElementById('totalParcelas').value
-let novo = {id:id++, nome:produto,tipo:tipoCad,valor:parseInt(valor),data:data}
+let novo = {id:id++, nome:produto,tipo:tipoCad,valor:parseInt(valor),data:data,parcela:'',totalParcela:''}
 
 if(data =='' || produto =='' || valor =='' ){
     alert('Você deve preencher todos os campos!')
@@ -205,28 +205,54 @@ if(data =='' || produto =='' || valor =='' ){
     mostraSecao('visualizar','cadastrar')
     gerenciar()
     }
-    else if(tipoCad == 'parcelado'){
-        let novo = {id:id++, nome:produto,tipo:tipoCad,valor:parseInt(valor),data:data,parcela:parcela,totalParcela:totalParcelas}
-        let indice 
-        switch (mesSel) {
-            case "jan":
-            indice = Number(0)
-            break
-            case "fev":
-                indice = Number(1)
-                break
-            case "mar":
-                indice = Number(2)
-                break    
-        }
-        for (let index = indice; index < Number(totalParcelas); index++ ) {
-            meses[index].push(novo)
-            //novo.id++
+    else if(tipoCad == 'parcelado'){        
+        
+        for (let index = 0 ; index < totalParcelas; index++ ) {
+            let novo = {nomeMes:mesSel,id:id++, nome:produto,tipo:tipoCad,valor:parseInt(valor),data:data,parcela:parcela++,totalParcela:totalParcelas}
+            meses[mesSel].push(novo)
+            if(mesSel =='jan'){
+                mesSel = 'fev'
+            }
+            else if(mesSel =='fev'){
+                mesSel = 'mar'
+            }
+            else if(mesSel =='mar'){
+                mesSel = 'abr'
+            }
+            else if(mesSel =='abr'){
+                mesSel = 'mai'
+            }
+            else if(mesSel =='mai'){
+                mesSel = 'jun'
+            }
+            else if(mesSel =='jun'){
+                mesSel = 'jul'
+            }
+            else if(mesSel =='jul'){
+                mesSel = 'ago'
+            }
+            else if(mesSel =='ago'){
+                mesSel = 'set'
+            }
+            else if(mesSel =='set'){
+                mesSel = 'out'
+            }
+            else if(mesSel =='out'){
+                mesSel = 'nov'
+            }
+            else if(mesSel =='nov'){
+                mesSel = 'dez'
+            }
+            else if(mesSel =='dez'){
+                mesSel = 'jan'
+            }
             gerenciar()
-        }
-            
             mostraSecao('visualizar','cadastrar')
-    } else{
+        }
+          
+        
+    }        
+     else {
         switch (mesSel) {
             case "jan":
             novo.nomeMes='jan'
@@ -300,11 +326,8 @@ function resetaCadastro(){
 
 
 function remove(id,nomeMes) {
-  
-    console.log(meses[nomeMes])
     var indexToRemove = meses[nomeMes].findIndex(item => item.id ==id)
     meses[nomeMes].splice(indexToRemove,1)
-    console.log(meses[nomeMes])
     desenhaTela(meses[nomeMes])
     gerenciar()
 }

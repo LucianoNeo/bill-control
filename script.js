@@ -117,7 +117,7 @@ function desenhaTela(meses) {
     for (var i = 0; i < parcelado.length; i++) {
         elemento += "<tr><td>" + parcelado[i].data + " </td>";
         //elemento += "<td> (" + parcelado[i].parcela + " de " + parcelado[i].totalParcela+") " + parcelado[i].nome + "</td>";
-        elemento += "<td>" + parcelado[i].nome + " " + parcelado[i].parcela +"/"+ parcelado[i].totalParcela+"</td>";
+        elemento += "<td>" + parcelado[i].nome + " (" + parcelado[i].parcela +"/"+ parcelado[i].totalParcela+")</td>";
         elemento += "<td>R$" + parcelado[i].valor + "</td>";
         total += parcelado[i].valor
         elemento += "<td>" + "<button class='verde' onclick=''>📝</button>"+
@@ -363,7 +363,7 @@ function gerenciar(){
 function editar(id, nomeMes){
     
     let item = meses[nomeMes].find( item => item.id == id ) 
-    
+    let campoId= document.getElementById('id')
     let mesSel = document.getElementById('mesCad')
     let tipoCad = document.getElementById('tipo')
     let data = document.getElementById('data')
@@ -371,13 +371,14 @@ function editar(id, nomeMes){
     let valor = document.getElementById('valor')
     let parcela = document.getElementById('parcela')
     let totalParcelas = document.getElementById('totalParcelas')
-    console.log(item)
-    mostraSecao('cadastrar','visualizar')
     
+    mostraSecao('cadastrar','visualizar')
+
+    campoId.value = item.id
     mesSel.value = item.nomeMes;
     data.value = item.data
     produto.value = item.nome
-    valor.value = item.valor
+    valor.value = parseInt(item.valor)
     tipoCad.value = item.tipo
     parcela.value = item.parcela
     totalParcelas.value = item.totalParcela
@@ -385,19 +386,31 @@ function editar(id, nomeMes){
     
     botaoCad.disabled = true
     botaoEdit.disabled = false
-    botaoEdit.addEventListener("click", function(){
-    item.nomeMes = mesSel.value 
-    item.data =   data.value
-    item.nome =  produto.value
-    item.valor  =  valor.value
-    item.tipo  =    tipoCad.value
-    item.parcela =   parcela.value 
-    item.totalParcela = totalParcelas.value
+    
+    }
+
+    function enviar() {
+        
+        let id = document.getElementById('id').value
+        let mesSel = document.getElementById('mesCad')
+        let tipoCad = document.getElementById('tipo')
+        let data = document.getElementById('data')
+        let produto =document.getElementById('produto')
+        let valor = document.getElementById('valor')
+        let parcela = document.getElementById('parcela')
+        let totalParcelas = document.getElementById('totalParcelas')
+        
+        let editado = meses[mesSel.value].find( editado => editado.id == id ) 
+                
+        editado.nomeMes = mesSel.value 
+        editado.data =   data.value
+        editado.nome =  produto.value
+        editado.valor  =  parseInt(valor.value)
+        editado.tipo  =    tipoCad.value
+        editado.parcela =   parcela.value 
+        editado.totalParcela = totalParcelas.value
+
         alert('Cadastro editado com sucesso!')
-        console.log(item)
         mostraSecao('visualizar','cadastrar')
         gerenciar()
-    }
-    );
-    
     }

@@ -260,11 +260,15 @@ table button {
   }
 
   .gerenciamento{
-    //display: none;
+    display: none;
     margin-top:20px;
     
   }
   .gerenciamento table{
     margin:0;
     width: 100%;
+  }
+
+  #id{
+    display: none;
   }

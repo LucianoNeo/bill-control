@@ -20,6 +20,8 @@
 <p onclick="mostraSecao('visualizar','cadastrar')">Visualizar 👓</p>
 
 <p onclick="mostraSecao('cadastrar','visualizar')">Cadastrar 📑</p>
+
+<p onclick="mostraSecao('gerenciar','visualizar')">Gerenciar 🛠</p>
 </div>
 </header>
 <div id="totalMes" class="total">
@@ -108,6 +110,7 @@
         <section class="cadastrar" id="cadastrar">
             <p>Cadastro</p> 
             <form action="">
+              <input type="number" name="id" id="id"><br>
                 <label for="mes"><Mês>Mês</label>
                 <select name="mes" id="mesCad">
                     <option value="jan">Janeiro</option>
@@ -143,7 +146,7 @@
                 <label for="valor">Valor:</label>
                 <input type="text" name="valor" id="valor"><br>             
                 <input id="btnCadastro"type="button" value="Cadastrar" onclick="cadastrar()">
-                <button id="btnEditar"type="button" value="Editar" disabled>Editar</button> 
+                <button id="btnEditar"type="button" value="Editar" disabled onclick="enviar()">Editar</button> 
             </form>
         </section>
         <!-- <footer id="rodape"> <p>Developed by LucianoNeo ©2022</p></footer> -->

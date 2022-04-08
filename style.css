@@ -5,11 +5,13 @@ body{
     background-image: url("./img/fundo.png");
     background-repeat:repeat-y;
     background-size: cover;
-    max-height: 97vh;
+    height: 96vh;
+    width: 100vw;
     margin: 0;
-    
-    
-    
+}
+
+button{
+  cursor: pointer;
 }
 
 .visualizar{
@@ -17,23 +19,22 @@ body{
 }
 
 .cadastrar{
-    padding-left: 25px;
-    padding-right: 25px;
-    padding-top: 2px;
-    padding-bottom: 20px;
-    margin:auto;
+    padding: 20px 10px 20px 10px;
+    margin:0 auto;
     margin-top: 20px;
     width: 280px;
-    background-color: rgb(39, 37, 37);;
+    background-color: rgb(39, 37, 37);
     font-weight: bold;
     text-shadow: 0.05em 0.05em 0.05em rgb(29, 27, 27);
     display: none;
     align-items: center;
-    
+    border-radius: 10px;
+    text-align: center;
 }
 
 .cadastrar p{
-  
+   
+      margin:0;
       font-weight: bold;
       text-shadow: 0.05em 0.05em 0.05em rgb(29, 27, 27);
       font-size: 20pt;
@@ -43,26 +44,50 @@ body{
 .cadastrar input,select{
   font-family: 'PT Sans Narrow', sans-serif;
   font-size: 15pt;
-  width: 90%;
-  margin-bottom: 10px;
+  width: 70%;
+  margin-top: 10px;
+ margin-bottom: 5px;
   background-color: rgb(54, 50, 50);
   color: #F2FFFC;
-  //border-radius: 10px;
+  border: none;
+  padding: 5px 10px 5px 10px;
 }
 
 .cadastrar button{
   font-family: 'PT Sans Narrow', sans-serif;
   font-size: 15pt;
-  width: 90%;
+  width: 70%;
   margin-bottom: 10px;
   background-color: rgb(54, 50, 50);
   color: #F2FFFC;
-  //border-radius: 10px;
 }
 
-.cadastrar button:disabled{
+#btnCadastro{
+  border: solid 1px rgba(129, 25, 100, 0.767);
+  text-align: center;
+  cursor: pointer;
+  width: 50%;
+}
+
+#btnEditar{
+  justify-content: center;
+  padding: 5px 10px 5px 10px;
+  border: solid 1px rgba(129, 25, 100, 0.767);
+  text-align: center;
+  cursor: pointer;
+  width: 200px;
+}
+
+#btnEditar:disabled{
   background-color: rgba(54, 50, 50, 0.073);
   color: #f2fffc30;
+  border: solid 1px rgba(54, 50, 50, 0.073);
+}
+
+#btnCadastro:disabled{
+  background-color: rgba(54, 50, 50, 0.073);
+  color: #f2fffc30;
+  border: solid 1px rgba(54, 50, 50, 0.073);
 }
 
 .cadastrar input:disabled{
@@ -98,7 +123,7 @@ header{
 
 
   header h1{
-    font-size: 3vh;
+    font-size: 3vw;
     color: #F2FFFC;
     text-align: center;
     margin-top: 5px;
@@ -114,7 +139,15 @@ header{
   .menu p{
     color: #F2FFFC;
     text-align: center;
-    
+    font-size: 2vw;
+    margin: auto;
+    margin-right: 50px;
+  }
+
+  .menu h1{
+    color: #F2FFFC;
+    text-align: center;
+    font-size: 2vw;
     margin: auto;
     margin-right: 50px;
   }
@@ -124,6 +157,8 @@ header{
     transition: all 0.5s ease;
   transform: scale(1.5);
   }
+
+  
 
 
 #bv{
@@ -206,7 +241,7 @@ table {
 
 
 
-  .vermelho{
+.vermelho{
     background-color: rgba(255, 255, 255, 0);
     border: solid 1px red;
 }
@@ -220,16 +255,6 @@ table button {
     padding-left: 1px;
     width: 20px;
     margin-left: 10px;
-  }
-
-  form{
-    font-family: 'PT Sans Narrow', sans-serif;
-    width: 100%;
-    height: 100%;
-    font-size: 14pt;
-      display: -ms-inline-grid;
-      flex-wrap: wrap;
-      align-items: flex-start;
   }
 
   footer {
@@ -262,12 +287,19 @@ table button {
   .gerenciamento{
     display: none;
     margin-top:20px;
-    
+    border-radius: 0;
   }
   .gerenciamento table{
-    margin:0;
-    width: 100%;
+    margin:0 auto;
+    width: 98%;
+    font-size: 2.5vw;
   }
+
+  .gerenciamento button{
+    text-align: center;
+    justify-content: center;
+  }
+
 
   #id{
     display: none;

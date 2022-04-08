@@ -66,8 +66,8 @@ function desenhaTela(meses) {
         elemento += "<td>" + fixas[i].nome + "</td>";
         elemento += "<td>R$" + fixas[i].valor + "</td>";
         total += Number(fixas[i].valor)
-        elemento += "<td>" + "<button class='verde' onclick=''>📝</button>"+
-        `<button class='vermelho' onclick='remove("${fixas[i].id}","${fixas[i].nomeMes}")'>❌</button></td></tr>`
+        elemento += `<td>  <button title='EDITAR' class='verde' onclick='editar("${fixas[i].id}","${fixas[i].nomeMes}")'>📝</button>`+
+        `<button title='REMOVER' class='vermelho' onclick='remove("${fixas[i].id}","${fixas[i].nomeMes}")'>❌</button></td></tr>`
 
     }
     res.innerHTML = elemento;
@@ -83,8 +83,8 @@ function desenhaTela(meses) {
         elemento += "<td>" + extras[i].nome + "</td>";
         elemento += "<td>R$" + extras[i].valor + "</td>";
         total += Number(extras[i].valor)
-        elemento += "<td>" + "<button class='verde' onclick=''>📝</button>"+
-        `<button class='vermelho' onclick='remove("${extras[i].id}","${extras[i].nomeMes}")'>❌</button></td></tr>`
+        elemento += `<td> <button title='EDITAR'  class='verde' onclick='editar("${extras[i].id}","${extras[i].nomeMes}")'>📝</button>`+
+        `<button title='REMOVER' class='vermelho' onclick='remove("${extras[i].id}","${extras[i].nomeMes}")'>❌</button></td></tr>`
         
     }
     res.innerHTML = elemento;
@@ -100,8 +100,8 @@ function desenhaTela(meses) {
         elemento += "<td>" + lanches[i].nome + "</td>";
         elemento += "<td>R$" + lanches[i].valor + "</td>";
         total += Number(lanches[i].valor)
-        elemento += "<td>" + "<button class='verde' onclick=''>📝</button>"+
-        `<button class='vermelho' onclick='remove("${lanches[i].id}","${lanches[i].nomeMes}")'>❌</button></td></tr>`
+        elemento += `<td> <button title='EDITAR'  class='verde' onclick='editar("${lanches[i].id}","${lanches[i].nomeMes}")'>📝</button>`+
+        `<button title='REMOVER' class='vermelho' onclick='remove("${lanches[i].id}","${lanches[i].nomeMes}")'>❌</button></td></tr>`
 
     }
     res.innerHTML = elemento;
@@ -120,8 +120,8 @@ function desenhaTela(meses) {
         elemento += "<td>" + parcelado[i].nome + " (" + parcelado[i].parcela +"/"+ parcelado[i].totalParcela+")</td>";
         elemento += "<td>R$" + parcelado[i].valor + "</td>";
         total += parcelado[i].valor
-        elemento += "<td>" + "<button class='verde' onclick=''>📝</button>"+
-        `<button class='vermelho' onclick='remove("${parcelado[i].id}","${parcelado[i].nomeMes}")'>❌</button></td></tr>`
+        elemento += `<td> <button title='EDITAR'  class='verde' onclick='editar("${parcelado[i].id}","${parcelado[i].nomeMes}")'>📝</button>`+
+        `<button title='REMOVER' class='vermelho' onclick='remove("${parcelado[i].id}","${parcelado[i].nomeMes}")'>❌</button></td></tr>`
         
     }
     res.innerHTML = elemento;
@@ -135,13 +135,24 @@ function desenhaTela(meses) {
     // document.getElementById('rodape').style.bottom='-10px'
     campoTotalMes.style.display='block'
     campoTotalMes.innerText += `R$ ${totalMes}`
-    gerenciar()
 }
 
+
+
+function mostraGerenciar() {
+    document.getElementById('bv').style.display='none'
+    document.getElementById('gerenciamento').style.display='flex'
+    document.getElementById('visualizar').style.display='none'
+    document.getElementById('cadastrar').style.display='none'
+    campoTotalMes.style.display='none'
+    gerenciar()
+    
+}
 
 function mostraSecao(secao,desligar) {
     var ver = document.getElementById(secao)
     var apagar = document.getElementById(desligar)
+    document.getElementById('gerenciamento').style.display='none'
     if(secao == 'cadastrar'){
         botaoCad.disabled = false
         botaoEdit.disabled = true
@@ -209,7 +220,6 @@ if(data =='' || produto =='' || valor =='' ){
 }
     alert('Cadastro realizado com sucesso!')
     mostraSecao('visualizar','cadastrar')
-    gerenciar()
     }
     else if(tipoCad == 'parcelado'){        
         
@@ -252,7 +262,6 @@ if(data =='' || produto =='' || valor =='' ){
             else if(mesSel =='dez'){
                 mesSel = 'jan'
             }
-            gerenciar()
             mostraSecao('visualizar','cadastrar')
         }
           
@@ -264,14 +273,12 @@ if(data =='' || produto =='' || valor =='' ){
             novo.nomeMes='jan'
             jan.push(novo)
             alert('Cadastro realizado com sucesso!')
-            gerenciar()
             mostraSecao('visualizar','cadastrar')
             break
             case "fev":
                 novo.nomeMes='fev'
                 fev.push(novo)
                 alert('Cadastro realizado com sucesso!')
-                gerenciar()
                 mostraSecao('visualizar','cadastrar')
                 break
             case "mar":
@@ -333,8 +340,12 @@ function resetaCadastro(){
 
 function remove(id,nomeMes) {
     var indexToRemove = meses[nomeMes].findIndex(item => item.id ==id)
-    meses[nomeMes].splice(indexToRemove,1)
-    desenhaTela(meses[nomeMes])
+    if(confirm('Quer deletar o registro de id '+id)){
+        meses[nomeMes].splice(indexToRemove,1)
+        alert("Item de id: "+id+" removido") 
+        resetaTabelas()
+    }
+    
     gerenciar()
 }
 
@@ -352,8 +363,8 @@ function gerenciar(){
             elemento += "<td>" + meses[mes][i].tipo + "</td>";
             elemento += "<td>" + meses[mes][i].parcela + "</td>";
             elemento += "<td>" + meses[mes][i].totalParcela + "</td>";
-            elemento += `<td> <button class='verde' onclick='editar("${meses[mes][i].id}","${meses[mes][i].nomeMes}")'>📝</button>`+
-            `<button class='vermelho' onclick='remove("${meses[mes][i].id}","${meses[mes][i].nomeMes}")'>❌</button></td></tr>`
+            elemento += `<td> <button title='EDITAR' class='verde' onclick='editar("${meses[mes][i].id}","${meses[mes][i].nomeMes}")'>📝</button>`+
+            `<button title='REMOVER' class='vermelho' onclick='remove("${meses[mes][i].id}","${meses[mes][i].nomeMes}")'>❌</button></td></tr>`
         }
     }
     resultado.innerHTML = elemento
@@ -412,5 +423,6 @@ function editar(id, nomeMes){
 
         alert('Cadastro editado com sucesso!')
         mostraSecao('visualizar','cadastrar')
-        gerenciar()
+        document.getElementById('mes').value = editado.nomeMes
+        desenhaTela(meses[editado.nomeMes])
     }

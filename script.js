@@ -1,5 +1,5 @@
-var jan = []
-var fev = []
+let jan = []
+let fev = []
 var mar = []
 var abr = []
 var mai = []
@@ -11,21 +11,19 @@ var out = []
 var nov = []
 var dez = []
 
-var meses = {jan,fev,mar,abr,mai,jun,jul,ago,set,out,nov,dez}
+const meses = {jan,fev,mar,abr,mai,jun,jul,ago,set,out,nov,dez}
 var campoTotalMes = document.getElementById('totalMes')
 var id = Number(000)
 var novo = {nomeMes:'jan',id:id++,nome:'produto',  tipo: 'fixa', valor:'25' , data: '21',parcela:'',totalParcela:''}
 jan.push(novo)
 var novo = {nomeMes:'jan',id:id++,nome:'produto2',  tipo: 'fixa', valor:'25' , data: '21',parcela:'',totalParcela:''}
 jan.push(novo)
+var novo = {nomeMes:'fev',id:id++,nome:'produto2',  tipo: 'fixa', valor:'25' , data: '21',parcela:'',totalParcela:''}
+fev.push(novo)
 
 function escolheMes() {
     var escolha = document.getElementById('mes')
-    if (escolha.value == 'jan') {
-        desenhaTela(jan)
-    } else{
-        desenhaTela(fev)
-  }
+    desenhaTela(meses[escolha.value])
 }
 
 
@@ -56,7 +54,7 @@ function desenhaTela(meses) {
     var elemento ='';
     var total = Number(0)
     var totalMes = Number(0)
-    
+   
     campoTotalMes.innerHTML = '<p>Total do mês: <br></p>'
     //document.getElementById('rodape').style.position='absolute'
     for (var i = 0; i < fixas.length; i++) {
@@ -199,10 +197,10 @@ if(data =='' || produto =='' || valor =='' ){
     alert('Você deve preencher todos os campos!')
 }else{
     if (tipoCad =='fixa'){
-    
-    for (let i = 0; i < meses.length; i++) {
-        meses[i].push(novo)
-    }
+        for (const mes in meses){
+        let novo = {nomeMes:mes,id:id++, nome:produto,tipo:tipoCad,valor:parseInt(valor),data:data,parcela:'',totalParcela:''}
+        meses[mes].push(novo)
+}
     alert('Cadastro realizado com sucesso!')
     mostraSecao('visualizar','cadastrar')
     gerenciar()
@@ -304,9 +302,10 @@ function resetaCadastro(){
 function remove(id,nomeMes) {
   
     console.log(meses[nomeMes])
-    meses[nomeMes] = meses[nomeMes].filter(item => item.id != id)
+    var indexToRemove = meses[nomeMes].findIndex(item => item.id ==id)
+    meses[nomeMes].splice(indexToRemove,1)
     console.log(meses[nomeMes])
-    resetaTabelas()
+    desenhaTela(meses[nomeMes])
     gerenciar()
 }
 
@@ -314,20 +313,19 @@ function remove(id,nomeMes) {
 function gerenciar(){
     var resultado = document.getElementById("mostraGer");
     var elemento ='';
-    
-    
-    for (var i = 0; i < jan.length; i++) {
-        elemento += "<tr><td>" + jan[i].id + " </td>";
-        elemento += "<td>" + jan[i].nomeMes + " </td>";
-        elemento += "<td>" + jan[i].data + " </td>";
-        elemento += "<td>" + jan[i].nome + "</td>";
-        elemento += "<td>R$" + jan[i].valor + "</td>";
-        elemento += "<td>" + jan[i].tipo + "</td>";
-        elemento += "<td>" + jan[i].parcela + "</td>";
-        elemento += "<td>" + jan[i].totalParcela + "</td>";
-        elemento += "<td>" + "<button class='verde' onclick=''>📝</button>"+
-        `<button class='vermelho' onclick='remove(${jan[i].id})'>❌</button></td></tr>`
-
+    for (const mes in meses){
+        for (var i = 0; i < meses[mes].length; i++){
+            elemento += "<tr><td>" +meses[mes][i].id + " </td>";
+            elemento += "<td>" + meses[mes][i].nomeMes + " </td>";
+            elemento += "<td>" + meses[mes][i].data + " </td>";
+            elemento += "<td>" + meses[mes][i].nome + "</td>";
+            elemento += "<td>R$" + meses[mes][i].valor + "</td>";
+            elemento += "<td>" + meses[mes][i].tipo + "</td>";
+            elemento += "<td>" + meses[mes][i].parcela + "</td>";
+            elemento += "<td>" + meses[mes][i].totalParcela + "</td>";
+            elemento += "<td>" + "<button class='verde' onclick=''>📝</button>"+
+            `<button class='vermelho' onclick='remove("${meses[mes][i].id}","${meses[mes][i].nomeMes}")'>❌</button></td></tr>`
+        }
     }
     resultado.innerHTML = elemento
 

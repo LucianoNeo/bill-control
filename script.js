@@ -11,7 +11,11 @@ var out = []
 var nov = []
 var dez = []
 
+var botaoCad = document.getElementById('btnCadastro')
+var botaoEdit = document.getElementById('btnEditar')
+
 const meses = {jan,fev,mar,abr,mai,jun,jul,ago,set,out,nov,dez}
+
 var campoTotalMes = document.getElementById('totalMes')
 var id = Number(000)
 var novo = {nomeMes:'jan',id:id++,nome:'produto',  tipo: 'fixa', valor:'25' , data: '21',parcela:'',totalParcela:''}
@@ -139,6 +143,8 @@ function mostraSecao(secao,desligar) {
     var ver = document.getElementById(secao)
     var apagar = document.getElementById(desligar)
     if(secao == 'cadastrar'){
+        botaoCad.disabled = false
+        botaoEdit.disabled = true
         resetaTabelas()
         //document.getElementById('rodape').style.position='relative'
         campoTotalMes.style.display='none'
@@ -183,7 +189,7 @@ function ligaParcelas() {
 }
 
 function cadastrar() {
-
+    
 let mesSel = document.getElementById('mesCad').value
 let tipoCad = document.getElementById('tipo').value
 let data = document.getElementById('data').value
@@ -346,10 +352,52 @@ function gerenciar(){
             elemento += "<td>" + meses[mes][i].tipo + "</td>";
             elemento += "<td>" + meses[mes][i].parcela + "</td>";
             elemento += "<td>" + meses[mes][i].totalParcela + "</td>";
-            elemento += "<td>" + "<button class='verde' onclick=''>📝</button>"+
+            elemento += `<td> <button class='verde' onclick='editar("${meses[mes][i].id}","${meses[mes][i].nomeMes}")'>📝</button>`+
             `<button class='vermelho' onclick='remove("${meses[mes][i].id}","${meses[mes][i].nomeMes}")'>❌</button></td></tr>`
         }
     }
     resultado.innerHTML = elemento
 
 }
+
+function editar(id, nomeMes){
+    
+    let item = meses[nomeMes].find( item => item.id == id ) 
+    
+    let mesSel = document.getElementById('mesCad')
+    let tipoCad = document.getElementById('tipo')
+    let data = document.getElementById('data')
+    let produto =document.getElementById('produto')
+    let valor = document.getElementById('valor')
+    let parcela = document.getElementById('parcela')
+    let totalParcelas = document.getElementById('totalParcelas')
+    console.log(item)
+    mostraSecao('cadastrar','visualizar')
+    
+    mesSel.value = item.nomeMes;
+    data.value = item.data
+    produto.value = item.nome
+    valor.value = item.valor
+    tipoCad.value = item.tipo
+    parcela.value = item.parcela
+    totalParcelas.value = item.totalParcela
+
+    
+    botaoCad.disabled = true
+    botaoEdit.disabled = false
+    botaoEdit.addEventListener("click", function(){
+    item.nomeMes = mesSel.value 
+    item.data =   data.value
+    item.nome =  produto.value
+    item.valor  =  valor.value
+    item.tipo  =    tipoCad.value
+    item.parcela =   parcela.value 
+    item.totalParcela = totalParcelas.value
+        alert('Cadastro editado com sucesso!')
+        console.log(item)
+        mostraSecao('visualizar','cadastrar')
+        gerenciar()
+    }
+    );
+    
+    }

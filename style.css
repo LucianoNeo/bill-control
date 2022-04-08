@@ -28,13 +28,13 @@ body{
     font-weight: bold;
     text-shadow: 0.05em 0.05em 0.05em rgb(29, 27, 27);
     display: none;
-    border-radius: 10px;
+    align-items: center;
     
 }
 
 .cadastrar p{
   
-    font-weight: bold;
+      font-weight: bold;
       text-shadow: 0.05em 0.05em 0.05em rgb(29, 27, 27);
       font-size: 20pt;
 }
@@ -43,11 +43,33 @@ body{
 .cadastrar input,select{
   font-family: 'PT Sans Narrow', sans-serif;
   font-size: 15pt;
-  width: 100%;
+  width: 90%;
   margin-bottom: 10px;
   background-color: rgb(54, 50, 50);
   color: #F2FFFC;
+  //border-radius: 10px;
 }
+
+.cadastrar button{
+  font-family: 'PT Sans Narrow', sans-serif;
+  font-size: 15pt;
+  width: 90%;
+  margin-bottom: 10px;
+  background-color: rgb(54, 50, 50);
+  color: #F2FFFC;
+  //border-radius: 10px;
+}
+
+.cadastrar button:disabled{
+  background-color: rgba(54, 50, 50, 0.073);
+  color: #f2fffc30;
+}
+
+.cadastrar input:disabled{
+  background-color: rgba(54, 50, 50, 0.073);
+  color: #f2fffc30;
+}
+
 
 .parcelas {
   display:none;

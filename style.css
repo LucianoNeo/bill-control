@@ -39,7 +39,7 @@ button{
     border-radius: 10px;
     text-align: center;
     justify-content: center;
-    height: 80vh;
+    max-height: 80vh;
 }
 .cadastrar label{
   text-align: center;

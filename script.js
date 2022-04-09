@@ -231,7 +231,7 @@ let parcela = document.getElementById('parcela').value
 let totalParcelas = document.getElementById('totalParcelas').value
 let novo = {id:id++, nome:produto,tipo:tipoCad,valor:parseInt(valor),data:data,parcela:'',totalParcela:''}
 
-if(data =='' || produto =='' || valor =='' ){
+if(data =='' || produto =='' || valor =='' || mesSel ==''){
     alert('Você deve preencher todos os campos!')
 }else{
     if (tipoCad =='fixa'){

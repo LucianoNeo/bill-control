@@ -348,8 +348,7 @@ function gerenciar(){
             elemento += "<td>" + meses[mes][i].nome + "</td>";
             elemento += "<td>R$" + meses[mes][i].valor + "</td>";
             elemento += "<td>" + meses[mes][i].tipo + "</td>";
-            elemento += "<td>" + meses[mes][i].parcela + "</td>";
-            elemento += "<td>" + meses[mes][i].totalParcela + "</td>";
+            elemento += "<td>" + meses[mes][i].parcela +" de " +meses[mes][i].totalParcela +"</td>";
             elemento += `<td> <button title='EDITAR' class='verde' onclick='editar("${meses[mes][i].id}","${meses[mes][i].nomeMes}")'>📝</button>`+
             `<button title='REMOVER' class='vermelho' onclick='remove("${meses[mes][i].id}","${meses[mes][i].nomeMes}")'>❌</button></td></tr>`
         }

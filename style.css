@@ -378,3 +378,17 @@ table button {
     right: 10px;
     cursor: pointer;
   }
+
+
+  @media screen and (max-width: 400px){
+    
+    #limpar{
+      position: absolute;
+      top: 63px;
+    }
+    
+    .cadastrar{
+      height: 500px;
+  }
+
+}

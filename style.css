@@ -300,7 +300,9 @@ table button {
     justify-content: center;
   }
 
-
+.gerenciamento table td{
+margin.right:10px;
+} 
   #id{
     display: none;
   }

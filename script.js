@@ -1,3 +1,5 @@
+var KEY_BD = ''
+
 let jan = []
 let fev = []
 var mar = []
@@ -14,16 +16,29 @@ var dez = []
 var botaoCad = document.getElementById('btnCadastro')
 var botaoEdit = document.getElementById('btnEditar')
 
-const meses = {jan,fev,mar,abr,mai,jun,jul,ago,set,out,nov,dez}
+var meses = {jan,fev,mar,abr,mai,jun,jul,ago,set,out,nov,dez}
 
 var campoTotalMes = document.getElementById('totalMes')
 var id = Number(000)
-var novo = {nomeMes:'jan',id:id++,nome:'produto',  tipo: 'fixa', valor:'25' , data: '21',parcela:'',totalParcela:''}
-jan.push(novo)
-var novo = {nomeMes:'jan',id:id++,nome:'produto2',  tipo: 'fixa', valor:'25' , data: '21',parcela:'',totalParcela:''}
-jan.push(novo)
-var novo = {nomeMes:'fev',id:id++,nome:'produto2',  tipo: 'fixa', valor:'25' , data: '21',parcela:'',totalParcela:''}
-fev.push(novo)
+// var novo = {nomeMes:'jan',id:id++,nome:'produto',  tipo: 'fixa', valor:'25' , data: '21',parcela:'',totalParcela:''}
+// jan.push(novo)
+// var novo = {nomeMes:'jan',id:id++,nome:'produto2',  tipo: 'fixa', valor:'25' , data: '21',parcela:'',totalParcela:''}
+// jan.push(novo)
+// var novo = {nomeMes:'fev',id:id++,nome:'produto2',  tipo: 'fixa', valor:'25' , data: '21',parcela:'',totalParcela:''}
+// fev.push(novo)
+// gravarBD()
+
+function gravarBD(){
+    localStorage.setItem(KEY_BD, JSON.stringify(meses) )
+}
+
+function lerBD(){
+    const dados = localStorage.getItem(KEY_BD)
+    if(dados){
+        meses = JSON.parse(dados)
+    }
+}
+
 
 function escolheMes() {
     var escolha = document.getElementById('mes')
@@ -33,23 +48,28 @@ function escolheMes() {
 
 
 function filtraFixa(conta){
+
     return conta.tipo == 'fixa';
 }
 
 function filtraExtras(conta){
+
     return conta.tipo == 'extras';
 }
 
 function filtraParcelado(conta){
+
     return conta.tipo == 'parcelado';
 }
 
 function filtraLanches(conta){
+
     return conta.tipo == 'lanches';
 }
 
 
 function desenhaTela(meses) {
+    lerBD()
     var fixas = meses.filter(filtraFixa);
     var extras = meses.filter(filtraExtras);
     var parcelado = meses.filter(filtraParcelado);
@@ -150,6 +170,7 @@ function mostraGerenciar() {
 }
 
 function mostraSecao(secao,desligar) {
+    
     var ver = document.getElementById(secao)
     var apagar = document.getElementById(desligar)
     document.getElementById('gerenciamento').style.display='none'
@@ -217,7 +238,7 @@ if(data =='' || produto =='' || valor =='' ){
         for (const mes in meses){
         let novo = {nomeMes:mes,id:id++, nome:produto,tipo:tipoCad,valor:parseInt(valor),data:data,parcela:'',totalParcela:''}
         meses[mes].push(novo)
-}
+    }
     alert('Cadastro realizado com sucesso!')
     mostraSecao('visualizar','cadastrar')
     }
@@ -226,6 +247,7 @@ if(data =='' || produto =='' || valor =='' ){
         for (let index = 0 ; index < totalParcelas; index++ ) {
             let novo = {nomeMes:mesSel,id:id++, nome:produto,tipo:tipoCad,valor:parseInt(valor),data:data,parcela:parcela++,totalParcela:totalParcelas}
             meses[mesSel].push(novo)
+            
             if(mesSel =='jan'){
                 mesSel = 'fev'
             }
@@ -262,60 +284,23 @@ if(data =='' || produto =='' || valor =='' ){
             else if(mesSel =='dez'){
                 mesSel = 'jan'
             }
-            mostraSecao('visualizar','cadastrar')
+            
         }
-          
+            alert('Cadastro realizado com sucesso!')
+            mostraSecao('visualizar','cadastrar')
         
     }        
      else {
-        switch (mesSel) {
-            case "jan":
-            novo.nomeMes='jan'
-            jan.push(novo)
+            novo.nomeMes = mesSel
+            meses[mesSel].push(novo)
             alert('Cadastro realizado com sucesso!')
             mostraSecao('visualizar','cadastrar')
-            break
-            case "fev":
-                novo.nomeMes='fev'
-                fev.push(novo)
-                alert('Cadastro realizado com sucesso!')
-                mostraSecao('visualizar','cadastrar')
-                break
-            case "mar":
-                mar.push(novo)
-                break    
          
-            case "abr":
-                abr.push(novo)
-                break
-            case "mai":
-                mai.push(novo)
-                break
-            case "jun":
-                jun.push(novo)
-                break
-            case "jul":
-                jul.push(novo)
-                break
-            case "ago":
-                ago.push(novo)
-                break
-            case "set":
-                set.push(novo)
-                break 
-            case "out":
-                out.push(novo)
-                break
-            case "nov":
-                nov.push(novo)
-                break
-            case "dez":
-                dez.push(novo)
-                break   
-        }
+        }      
 }
 
-}
+gravarBD()
+desenhaTela(meses[mesSel])
 }
 
 
@@ -342,6 +327,7 @@ function remove(id,nomeMes) {
     var indexToRemove = meses[nomeMes].findIndex(item => item.id ==id)
     if(confirm('Quer deletar o registro de id '+id)){
         meses[nomeMes].splice(indexToRemove,1)
+        gravarBD()
         alert("Item de id: "+id+" removido") 
         resetaTabelas()
     }
@@ -353,6 +339,7 @@ function remove(id,nomeMes) {
 function gerenciar(){
     var resultado = document.getElementById("mostraGer");
     var elemento ='';
+    lerBD()
     for (const mes in meses){
         for (var i = 0; i < meses[mes].length; i++){
             elemento += "<tr><td>" +meses[mes][i].id + " </td>";
@@ -420,9 +407,23 @@ function editar(id, nomeMes){
         editado.tipo  =    tipoCad.value
         editado.parcela =   parcela.value 
         editado.totalParcela = totalParcelas.value
-
+        gravarBD()
         alert('Cadastro editado com sucesso!')
         mostraSecao('visualizar','cadastrar')
         document.getElementById('mes').value = editado.nomeMes
         desenhaTela(meses[editado.nomeMes])
     }
+
+function limpar(){
+    if(confirm('Quer LIMPAR toda a lista de registros?')){
+        meses={jan,fev,mar,abr,mai,jun,jul,ago,set,out,nov,dez}
+        gravarBD()
+        alert("Lista Zerada!") 
+        resetaTabelas()
+        gerenciar()
+}
+}
+
+
+
+    window.addEventListener("load", lerBD)

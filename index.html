@@ -15,7 +15,7 @@
 </head>
 <body>
 <header>
-<h1>Expense Control 💵 v1.0</h1>
+<a href="index.html"><h1>Expense Control 💵 v1.0</h1></a>
 <div class="menu">
 <p onclick="mostraSecao('visualizar','cadastrar')">Visualizar 👓</p>
 
@@ -134,10 +134,10 @@
                   <option value="parcelado">Parceladas</option>
                 </select><br>
                 <div class='parcelas' id="parcelas">
-                  <label for="parcela">Parcela:</label><br>
-                  <input type="number" name="parcela" id="parcela"><br>
+                  <label for="parcela">Parcela:</label>
+                  <input type="number" name="parcela" id="parcela" min="1"><br>
                   <label for="data">de:</label>
-                <input type="number" name="totalParcelas" id="totalParcelas"><br>
+                <input type="number" name="totalParcelas" id="totalParcelas" min="2"><br>
                 </div>
                 <label for="data">Data:</label><br>
                 <input type="text" name="data" id="data"><br>
@@ -149,10 +149,11 @@
                 <button id="btnEditar"type="button" value="Editar" disabled onclick="enviar()">Editar</button> 
             </form>
         </section>
-        <!-- <footer id="rodape"> <p>Developed by LucianoNeo ©2022</p></footer> -->
+
     
     
     <section id="gerenciamento" class="gerenciamento">
+      <span class="titulo-secao">Gerenciamento</span>
       <table>
         <thead>
             
@@ -170,6 +171,7 @@
         <tbody id="mostraGer">
         </tbody>
         </table>
+        <p id='limpar' onclick="limpar()">Limpar Registros</p>
     </section>
 
 

@@ -494,16 +494,16 @@ function pegaUltimoId() {
             var ordenado = nova.sort((a,b) => a.data - b.data)
             break;
         case 'nome':
-            var ordenado = nova.sort((a,b) => a.nome - b.nome)
+            var ordenado = nova.sort((a,b) => a.nome.localeCompare(b.nome))
             break;
         case 'valor':
             var ordenado = nova.sort((a,b) => a.valor - b.valor)
             break;
         case 'tipo':
-            var ordenado = nova.sort((a,b) => a.tipo - b.tipo)
+            var ordenado = nova.sort((a,b) => a.tipo.localeCompare(b.tipo))
             break;
         case 'parcelas':
-            var ordenado = nova.sort((a,b) => a.parcela - b.parcela)
+            var ordenado = nova.sort((a,b) => a.parcela.localeCompare(b.parcela))
             break;           
         
     }
@@ -522,6 +522,4 @@ function pegaUltimoId() {
         }
     
     resultado.innerHTML = elemento    
-    console.log("clicou em: " + ordem)
-    console.log(ordenado)     
     }

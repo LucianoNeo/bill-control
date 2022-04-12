@@ -20,6 +20,7 @@ var meses = {jan,fev,mar,abr,mai,jun,jul,ago,set,out,nov,dez}
 
 var campoTotalMes = document.getElementById('totalMes')
 var id = Number(000)
+var ultimoId = 0
 // var novo = {nomeMes:'jan',id:id++,nome:'produto',  tipo: 'fixa', valor:'25' , data: '21',parcela:'',totalParcela:''}
 // jan.push(novo)
 // var novo = {nomeMes:'jan',id:id++,nome:'produto2',  tipo: 'fixa', valor:'25' , data: '21',parcela:'',totalParcela:''}
@@ -37,6 +38,7 @@ function lerBD(){
     if(dados){
         meses = JSON.parse(dados)
     }
+    pegaUltimoId()
 }
 
 
@@ -208,6 +210,19 @@ $(document).ready(function(){
 	$('#valor').mask('000.000.000.000.000,00' , { reverse : true});
 });
 
+var objetoVazio = {};
+var objetoContemValor = {
+  "key": "valor"
+};
+
+function isEmptyObject(obj) {
+  var name;
+  for (name in obj) {
+    return false;
+  }
+  return true;
+}
+
 
 function ligaParcelas() {
     var tipo = document.getElementById('tipo')
@@ -221,6 +236,7 @@ function ligaParcelas() {
 }
 
 function cadastrar() {
+pegaUltimoId()
     
 let mesSel = document.getElementById('mesCad').value
 let tipoCad = document.getElementById('tipo').value
@@ -229,14 +245,14 @@ let produto =document.getElementById('produto').value
 let valor = document.getElementById('valor').value
 let parcela = document.getElementById('parcela').value
 let totalParcelas = document.getElementById('totalParcelas').value
-let novo = {id:id++, nome:produto,tipo:tipoCad,valor:parseInt(valor),data:data,parcela:'',totalParcela:''}
+
 
 if(data =='' || produto =='' || valor =='' || mesSel ==''){
     alert('Você deve preencher todos os campos!')
 }else{
     if (tipoCad =='fixa'){
         for (const mes in meses){
-        let novo = {nomeMes:mes,id:id++, nome:produto,tipo:tipoCad,valor:parseInt(valor),data:data,parcela:'',totalParcela:''}
+        let novo = {nomeMes:mes,id:ultimoId++, nome:produto,tipo:tipoCad,valor:parseInt(valor),data:data,parcela:'',totalParcela:''}
         meses[mes].push(novo)
     }
     alert('Cadastro realizado com sucesso!')
@@ -245,7 +261,7 @@ if(data =='' || produto =='' || valor =='' || mesSel ==''){
     else if(tipoCad == 'parcelado'){        
         
         for (let index = 0 ; index < totalParcelas; index++ ) {
-            let novo = {nomeMes:mesSel,id:id++, nome:produto,tipo:tipoCad,valor:parseInt(valor),data:data,parcela:parcela++,totalParcela:totalParcelas}
+            let novo = {nomeMes:mesSel,id:ultimoId++, nome:produto,tipo:tipoCad,valor:parseInt(valor),data:data,parcela:parcela++,totalParcela:totalParcelas}
             meses[mesSel].push(novo)
             
             if(mesSel =='jan'){
@@ -291,6 +307,7 @@ if(data =='' || produto =='' || valor =='' || mesSel ==''){
         
     }        
      else {
+        let novo = {id:ultimoId++, nome:produto,tipo:tipoCad,valor:parseInt(valor),data:data,   parcela:'',totalParcela:''}
             novo.nomeMes = mesSel
             meses[mesSel].push(novo)
             alert('Cadastro realizado com sucesso!')
@@ -340,6 +357,8 @@ function gerenciar(){
     var resultado = document.getElementById("mostraGer");
     var elemento ='';
     lerBD()
+    pegaUltimoId()
+    //console.log(ultimoId)
     for (const mes in meses){
         for (var i = 0; i < meses[mes].length; i++){
             elemento += "<tr><td>" +meses[mes][i].id + " </td>";
@@ -424,5 +443,85 @@ function limpar(){
 }
 
 
+function pegaUltimoId() {
+    var novaId=[]
+    for (mes in meses){
+    for (var i = 0; i < meses[mes].length; i++){
+    novaId.push(meses[mes][i].id)
+        }
+    }
+    var ordenadoId = novaId.sort((a,b) => a - b)
+    if (ordenadoId.length != 0){
+    ultimoId = ordenadoId.at(-1) + 1
+    console.log(`lista preenchida ultimo id= ${ultimoId}`)
+    }   else{
+            
+            ultimoId= 0
+            console.log(`lista vazia id= ${ultimoId}`)
+            }
+}
+
 
     window.addEventListener("load", lerBD)
+
+
+    function ordenar(ordem) {
+    var nova=[]
+    
+    for (mes in meses){
+    for (var i = 0; i < meses[mes].length; i++){
+    var lancar = {nomeMes:'',id:'',nome:'',  tipo: '', valor:'' , data: '',parcela:'',totalParcela:''}
+    lancar.id=meses[mes][i].id
+    lancar.nomeMes=meses[mes][i].nomeMes
+    lancar.nome=meses[mes][i].nome
+    lancar.tipo=meses[mes][i].tipo
+    lancar.valor=meses[mes][i].valor
+    lancar.data=meses[mes][i].data
+    lancar.parcela=meses[mes][i].parcela
+    lancar.totalParcela=meses[mes][i].totalParcela
+    nova.push(lancar)
+        }
+        
+    }
+    switch (ordem) {
+        case 'id':
+            var ordenado = nova.sort((a,b) => a.id - b.id)
+            break;
+        case 'mes':
+            var ordenado = nova.sort((a,b) => a.nomeMes - b.nomeMes)
+            break;
+        case 'data':
+            var ordenado = nova.sort((a,b) => a.data - b.data)
+            break;
+        case 'nome':
+            var ordenado = nova.sort((a,b) => a.nome - b.nome)
+            break;
+        case 'valor':
+            var ordenado = nova.sort((a,b) => a.valor - b.valor)
+            break;
+        case 'tipo':
+            var ordenado = nova.sort((a,b) => a.tipo - b.tipo)
+            break;
+        case 'parcelas':
+            var ordenado = nova.sort((a,b) => a.parcela - b.parcela)
+            break;           
+        
+    }
+    var resultado = document.getElementById("mostraGer");
+    var elemento ='';
+        for (var i = 0; i < ordenado.length; i++){
+            elemento += "<tr><td>" +ordenado[i].id + " </td>";
+            elemento += "<td>" + ordenado[i].nomeMes + " </td>";
+            elemento += "<td>" + ordenado[i].data + " </td>";
+            elemento += "<td>" + ordenado[i].nome + "</td>";
+            elemento += "<td>R$" + ordenado[i].valor + "</td>";
+            elemento += "<td>" + ordenado[i].tipo + "</td>";
+            elemento += "<td>" + ordenado[i].parcela +" de " +ordenado[i].totalParcela +"</td>";
+            elemento += `<td> <button title='EDITAR' class='verde' onclick='editar("${ordenado[i].id}","${ordenado[i].nomeMes}")'>📝</button>`+
+            `<button title='REMOVER' class='vermelho' onclick='remove("${ordenado[i].id}","${ordenado[i].nomeMes}")'>❌</button></td></tr>`
+        }
+    
+    resultado.innerHTML = elemento    
+    console.log("clicou em: " + ordem)
+    console.log(ordenado)     
+    }

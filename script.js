@@ -149,17 +149,9 @@ function desenhaTela(meses) {
     res.innerHTML = elemento;
     res.innerHTML += `<td>TOTAL=</td><td></td><td><strong>R$${total}</strong></td></tr>`
     totalMes += total
-    
-    
-    // document.getElementById('rodape').style.position='relative'
-    // document.getElementById('rodape').style.width='103%'
-    // document.getElementById('rodape').style.height='40px'
-    // document.getElementById('rodape').style.bottom='-10px'
     campoTotalMes.style.display='block'
     campoTotalMes.innerText += `R$ ${totalMes}`
 }
-
-
 
 function mostraGerenciar() {
     document.getElementById('bv').style.display='none'

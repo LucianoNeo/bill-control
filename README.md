@@ -3,7 +3,10 @@ Starting a home expense control, to exercise my study of HTML, CSS and JavaScrip
 
 Initial Objectives:
 
-- register of expenses divided into 4 categories ( fixas, lanches, extras and parceladas)
-- visualization of all categories selecting by month
-- initially saving the data in local json
-- save this on a database (backend learning required...)
+✅- register of expenses divided into 4 categories ( fixas, lanches, extras and parceladas)<br>
+✅- visualization of all categories selecting by month<br>
+✅- saving the data in local json<br>
+✅- manage section<br>
+✅- edit / delete items<br>
+✅- order items<br>
+🧱- save data on a database (backend learning required...)
